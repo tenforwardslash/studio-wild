@@ -11,4 +11,19 @@
 	Tested up to: 5.2
 	Text Domain: studio-wild
 */
-/* =Theme customization starts here
+/* =Theme customization starts here */
+
+nav.site-navigation {
+    justify-content: space-around;
+    background-color: #6A8281;
+}
+
+nav.site-navigation ul.menu {
+    padding: 15px;
+}
+
+nav.site-navigation ul li a {
+    color: #EBECE7;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+}
