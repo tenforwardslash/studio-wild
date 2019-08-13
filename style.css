@@ -22,8 +22,50 @@ nav.site-navigation ul.menu {
     padding: 15px;
 }
 
-nav.site-navigation ul li a {
+nav.site-navigation ul.menu li.current_page_item a {
+    font-weight: bold;
+}
+
+nav.site-navigation ul.menu li a {
     color: #EBECE7;
     text-transform: uppercase;
     letter-spacing: 1.8px;
+}
+
+/*
+Moon phases -- Elementor doesn't let you include header + image on same row (that I've found yet)
+todo: swap out these URLs
+*/
+
+div.phase-1-moon:before {
+    content: "";
+    display: block;
+    background: url("/wp-content/uploads/2019/08/Phase1Moon_Black.png") no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+div.phase-2-moon:before {
+    content: "";
+    display: block;
+    background: url("/wp-content/uploads/2019/08/Phase2Moon_Black.png") no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+div.phase-3-moon:before {
+    content: "";
+    display: block;
+    background: url("/wp-content/uploads/2019/08/Phase3Moon_Black.png") no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 0 6px 0 0;
 }
