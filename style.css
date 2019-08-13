@@ -69,3 +69,25 @@ div.phase-3-moon:before {
     float: left;
     margin: 0 6px 0 0;
 }
+
+div.phase-4-moon:before {
+    content: "";
+    display: block;
+    background: url("/wp-content/uploads/2019/08/Phase4Moon_Black.png") no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+div.phase-5-moon:before {
+    content: "";
+    display: block;
+    background: url("/wp-content/uploads/2019/08/Phase5Moon_Black.png") no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 0 6px 0 0;
+}

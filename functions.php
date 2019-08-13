@@ -18,4 +18,5 @@ function my_theme_enqueue_styles() {
     );
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
-?>
+
+require_once('custom-widgets/sw-widgets.php');
