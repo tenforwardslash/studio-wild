@@ -1,6 +1,12 @@
 <?php
 namespace Elementor;
-
+/**
+ * Class Iconed_Title
+ *
+ * Iconed_Title widget creates a header with an image to the left of it
+ *
+ * @package Elementor
+ */
 class Iconed_Title extends Widget_Base {
 
     public function get_name() {
@@ -12,7 +18,7 @@ class Iconed_Title extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'fa fa-font';
+        return 'fa fa-heading';
     }
 
     public function get_categories() {
@@ -89,7 +95,7 @@ class Iconed_Title extends Widget_Base {
                 'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
-                        'min' => 20,
+                        'min' => 10,
                         'max' => 100,
                     ],
                 ],
@@ -109,7 +115,7 @@ class Iconed_Title extends Widget_Base {
         $settings = $this->get_settings_for_display();
         $icon_url = $settings['icon']['url'];
         $icon_size = $settings['icon_size']['size'] . $settings['icon_size']['unit'];
-        echo "<div style='display:flex'><div style='background: center / contain no-repeat url($icon_url);width:$icon_size;height:auto;margin:0.5rem 5px 1rem 0;'></div><$settings[header_size] class='title'>$settings[title]</$settings[header_size]></div></div>";
+        echo "<div style='display:flex'><div style='background: center / contain no-repeat url($icon_url);width:$icon_size;height:auto;margin:0 5px 0 0;'></div><$settings[header_size] style='margin-top: 0;margin-bottom:0;' class='title'>$settings[title]</$settings[header_size]></div></div>";
 
     }
 
