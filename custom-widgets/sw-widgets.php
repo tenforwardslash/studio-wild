@@ -1,5 +1,8 @@
 <?php
 
+// todo: swap to creating a full on elementor extension plugin, this whole folder doesn't really belong in a theme
+//  https://developers.elementor.com/creating-an-extension-for-elementor/
+
 class SW_Elementor_Widgets {
 
     protected static $instance = null;
