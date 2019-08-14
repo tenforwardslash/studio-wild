@@ -115,7 +115,12 @@ class Iconed_Title extends Widget_Base {
         $settings = $this->get_settings_for_display();
         $icon_url = $settings['icon']['url'];
         $icon_size = $settings['icon_size']['size'] . $settings['icon_size']['unit'];
-        echo "<div style='display:flex'><div style='background: center / contain no-repeat url($icon_url);width:$icon_size;height:auto;margin:0 15px 0 0;'></div><$settings[header_size] style='margin-top: 0;margin-bottom:0;' class='title'>$settings[title]</$settings[header_size]></div></div>";
+        $style = "background: center / contain no-repeat url($icon_url);width:$icon_size;height:auto;margin:0 15px 0 0;";
+        $header_tag = $settings['header_size'];
+        echo "<div style='display:flex'>
+                <div style='$style;'></div>
+                <$header_tag style='margin-top: 0;margin-bottom:0;' class='title'>$settings[title]</$header_tag>
+              </div>";
 
     }
 
