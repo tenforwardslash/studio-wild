@@ -17,6 +17,15 @@ nav.site-navigation {
     justify-content: space-around;
     background-color: #6A8281;
 }
+header {
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+}
+
+header.tastyheader {
+    display: none;
+}
 
 nav.site-navigation ul.menu {
     padding: 15px;
@@ -30,4 +39,14 @@ nav.site-navigation ul.menu li a {
     color: #EBECE7;
     text-transform: uppercase;
     letter-spacing: 1.8px;
+}
+
+.hero-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.full-height {
+    height: 100vh;
 }

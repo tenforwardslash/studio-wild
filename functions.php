@@ -6,7 +6,7 @@
  * Time: 07:17
  */
 
-function my_theme_enqueue_styles() {
+function studiowild_enqueue_styles() {
 
     $parent_style = 'hello-elementor';
 
@@ -17,6 +17,11 @@ function my_theme_enqueue_styles() {
         wp_get_theme()->get('Version')
     );
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
+function studiowild_enqueue_scripts() {
+    wp_enqueue_script('my-custom-script', get_stylesheet_directory_uri() .'/js/navbar.js', array('jquery'), null, true);
+}
+
+add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_scripts' );
 require_once('custom-widgets/sw-widgets.php');

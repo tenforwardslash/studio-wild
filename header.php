@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header>
+<header class="tastyheader very-sticky">
     <nav class="site-navigation" role="navigation">
         <?php wp_nav_menu( array( 'theme_location' => 'menu-1' ) ); ?>
     </nav>
