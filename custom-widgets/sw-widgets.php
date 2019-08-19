@@ -18,12 +18,14 @@ class SW_Elementor_Widgets {
     protected function __construct() {
         require_once('iconed-title.php');
         require_once('logo-hero-cta.php');
+        require_once('hero.php');
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
     }
 
     public function register_widgets() {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Iconed_Title() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Logo_Hero_CTA() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Hero() );
     }
 
 }
