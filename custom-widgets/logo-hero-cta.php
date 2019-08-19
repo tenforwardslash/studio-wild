@@ -54,6 +54,35 @@ class Logo_Hero_CTA extends Widget_Base {
                 'selector' => '{{WRAPPER}} .title',
             ]
         );
+        $this->add_responsive_control(
+            'title-padding',
+            [
+                'label' => __( 'Title Padding', 'plugin-name' ),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    '%' => [
+                        'min' => 0,
+                        'max' => 50,
+                    ],
+                ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
+                    'size' => 30,
+                    'unit' => '%',
+                ],
+                'tablet_default' => [
+                    'size' => 15,
+                    'unit' => '%',
+                ],
+                'mobile_default' => [
+                    'size' => 10,
+                    'unit' => '%',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .title' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->add_control(
             'logo',
@@ -65,26 +94,37 @@ class Logo_Hero_CTA extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'logo',
+        $this->add_responsive_control(
+            'logo_size',
             [
-                'label' => __( 'Size', 'elementor' ),
+                'label' => __( 'Logo Width', 'plugin-name' ),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
                         'min' => 50,
-                        'max' => 350,
+                        'max' => 400,
                     ],
                 ],
-                'default' => [
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
+                    'size' => 150,
                     'unit' => 'px',
+                ],
+                'tablet_default' => [
                     'size' => 100,
+                    'unit' => 'px',
+                ],
+                'mobile_default' => [
+                    'size' => 50,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .logo-image' => 'max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
         $this->add_control(
-            'background-image',
+            'background',
             [
                 'label' => __( 'Background Image', 'elementor' ),
                 'label_block' => true,
@@ -92,14 +132,31 @@ class Logo_Hero_CTA extends Widget_Base {
                 'placeholder' => __( 'Background IMage', 'elementor' ),
             ]
         );
-
         $this->add_control(
-            'button-link',
+            'image-overlay-bottom',
+            [
+                'label' => __( 'Bottom Image Overlay', 'elementor' ),
+                'label_block' => true,
+                'type' => Controls_Manager::MEDIA,
+                'placeholder' => __( 'Bottom overlay for background image', 'elementor' ),
+            ]
+        );
+        $this->add_control(
+            'button_link',
             [
                 'label' => __( 'Button Link', 'elementor' ),
                 'label_block' => true,
                 'type' => Controls_Manager::URL,
                 'placeholder' => __( 'CTA Link', 'elementor' ),
+            ]
+        );
+        $this->add_control(
+            'button_text',
+            [
+                'label' => __( 'Button Text', 'elementor' ),
+                'label_block' => true,
+                'type' => Controls_Manager::TEXT,
+                'placeholder' => __( 'Button Text', 'elementor' ),
             ]
         );
 
@@ -109,7 +166,20 @@ class Logo_Hero_CTA extends Widget_Base {
     protected function render() {
 
         $settings = $this->get_settings_for_display();
-        error_log('settings----\n' . print_r($settings, true), 0);
+        $logo_url = $settings['logo']['url'];
+        $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
+        $background_url = $settings['background']['url'];
+        $cta_url = $settings['button_link']['url'];
+        error_log(print_r($settings['button_link'], true), 0);
+        echo "<div class='full-height' style='background: center / cover no-repeat url($background_url); position: relative;'>
+            <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
+                <img src='$logo_url' style='object-fit: cover;'/>
+            </div>
+            <div style='display:flex;align-items: center;justify-content: center;height: 100%;flex-direction: column;text-align: center'>
+            <h1 class='title' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
+            <a href='$cta_url'><button class='sw-button'>$settings[button_text]</button></a>
+</div>
+        </div>";
 
     }
 
