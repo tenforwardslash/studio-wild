@@ -97,7 +97,7 @@ class Logo_Hero_CTA extends Widget_Base {
         $this->add_responsive_control(
             'logo_size',
             [
-                'label' => __( 'Logo Width', 'plugin-name' ),
+                'label' => __( 'Logo Width', 'elementor' ),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -123,13 +123,13 @@ class Logo_Hero_CTA extends Widget_Base {
                 ],
             ]
         );
-        $this->add_control(
-            'background',
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => __( 'Background Image', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::MEDIA,
-                'placeholder' => __( 'Background IMage', 'elementor' ),
+                'name' => 'background',
+                'label' => __( 'Background', 'elementor' ),
+                'types' => [ 'classic', 'gradient', 'video' ],
+                'selector' => '{{WRAPPER}} .logo-hero-cta-wrap',
             ]
         );
         $this->add_control(
@@ -168,10 +168,10 @@ class Logo_Hero_CTA extends Widget_Base {
         $settings = $this->get_settings_for_display();
         $logo_url = $settings['logo']['url'];
         $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
-        $background_url = $settings['background']['url'];
+//        $background_url = $settings['background']['url'];
         $cta_url = $settings['button_link']['url'];
         error_log(print_r($settings['button_link'], true), 0);
-        echo "<div class='full-height' style='background: center / cover no-repeat url($background_url); position: relative;'>
+        echo "<div class='full-height logo-hero-cta-wrap' style='position: relative;'>
             <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='$logo_url' style='object-fit: cover;'/>
             </div>
