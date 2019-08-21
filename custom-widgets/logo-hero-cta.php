@@ -123,15 +123,6 @@ class Logo_Hero_CTA extends Widget_Base {
                 ],
             ]
         );
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name' => 'background',
-                'label' => __( 'Background', 'elementor' ),
-                'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .logo-hero-cta-wrap',
-            ]
-        );
         $this->add_control(
             'image-overlay-bottom',
             [
@@ -164,20 +155,23 @@ class Logo_Hero_CTA extends Widget_Base {
     }
 
     protected function render() {
-
         $settings = $this->get_settings_for_display();
         $logo_url = $settings['logo']['url'];
         $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
 //        $background_url = $settings['background']['url'];
         $cta_url = $settings['button_link']['url'];
+        $overlay_url = $settings['image-overlay-bottom']['url'];
         error_log(print_r($settings['button_link'], true), 0);
         echo "<div class='full-height logo-hero-cta-wrap' style='position: relative;'>
             <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='$logo_url' style='object-fit: cover;'/>
             </div>
-            <div style='display:flex;align-items: center;justify-content: center;height: 100%;flex-direction: column;text-align: center'>
+            <div style='display:flex;align-items: center;justify-content: center;height: 100%;width: 100%;flex-direction: column;text-align: center'>
             <h1 class='title' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
             <a href='$cta_url'><button class='sw-button'>$settings[button_text]</button></a>
+            <div style='position: absolute; bottom: -20px;'>
+                <img src='$overlay_url' style='object-fit: cover;'/>
+            </div>
 </div>
         </div>";
 
