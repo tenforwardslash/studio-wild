@@ -24,4 +24,18 @@ function studiowild_enqueue_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_styles' );
 add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_scripts' );
+
 require_once('custom-widgets/sw-widgets.php');
+
+function add_studio_wild_widget_categories( $elements_manager ) {
+
+	$elements_manager->add_category(
+		'studio-wild',
+		[
+			'title' => __( 'Studio Wild Custom', 'SW Elementor Widgets' ),
+			'icon' => 'fa fa-plug',
+		]
+	);
+
+}
+add_action( 'elementor/elements/categories_registered', 'add_studio_wild_widget_categories' );

@@ -23,7 +23,7 @@ class Logo_Hero_CTA extends Widget_Base {
     }
 
     public function get_categories() {
-        return [ 'basic' ];
+        return [ 'studio-wild' ];
     }
     protected function _register_controls() {
 

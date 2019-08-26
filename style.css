@@ -69,8 +69,15 @@ img#footer-logo {
     width: 150px;
 }
 
+nav.site-navigation div.menu-main-menu-container {
+    width: 80%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
 nav.site-navigation ul.menu {
     padding: 15px;
+    justify-content: space-around;
 }
 
 nav.site-navigation ul.menu li.current_page_item a {
@@ -81,6 +88,10 @@ ul.menu li a {
     color: #EBECE7;
     text-transform: uppercase;
     letter-spacing: 1.8px;
+}
+
+ul.menu li a:hover {
+    text-decoration: underline;
 }
 
 .hero-title {
