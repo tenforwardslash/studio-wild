@@ -85,6 +85,24 @@ class Widget_Text_Carousel extends Widget_Base {
 			'title_field' => '{{{ repeating_secondary_text }}}',
 		]);
 
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'primary_text_typography',
+				'label' => __( 'Primary Text Typography' ),
+				'selector' => '{{WRAPPER}} .repeating-primary-text',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'secondary_text_typography',
+				'label' => __( 'Secondary Text Typography' ),
+				'selector' => '{{WRAPPER}} .repeating-secondary-text',
+			]
+		);
+
 		$slides_to_show = range( 1, 10 );
 		$slides_to_show = array_combine( $slides_to_show, $slides_to_show );
 
@@ -227,9 +245,26 @@ class Widget_Text_Carousel extends Widget_Base {
 				'type' => Controls_Manager::SELECT,
 				'default' => 'outside',
 				'options' => [
-					'outside' => __( 'Outside', 'elementor' ),
-					'inside' => __( 'Inside', 'elementor' ),
+					'outside' => __( 'Outside' ),
+					'inside' => __( 'Inside' ),
 				],
+			]
+		);
+
+		$this->add_control(
+			'dots_align',
+			[
+				'label' => __( 'Alignment', 'elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'center',
+				'options' => [
+					'left' => __( 'Left' ),
+					'center' => __( 'Center' ),
+					'right' => __( 'Right' ),
+				],
+                'selectors' => [
+	                '{{WRAPPER}} .custom-text-carousel-wrapper .custom-text-carousel .slick-dots' => 'text-align: {{VALUE}};',
+                ]
 			]
 		);
 
@@ -271,15 +306,14 @@ class Widget_Text_Carousel extends Widget_Base {
 			$text_slides = [];
 
 			foreach (  $settings['repeating_text_group'] as $item ) {
-				$text_slide_html = '<div>' . $item['repeating_primary_text'] . ', ' . $item['repeating_secondary_text'] . '</div>';
+				$text_slide_html = '<div><div class="repeating-primary-text">' . $item['repeating_primary_text'] . '</div>';
+				$text_slide_html .= '<div class="repeating-secondary-text">' . $item['repeating_secondary_text'] . '</div></div>';
 				$text_slides[] = $text_slide_html;
 			}
-
 
 			if ( empty( $text_slides ) ) {
 				return;
 			}
-
 
 			$this->add_render_attribute( 'repeating_text_group', 'class', 'custom-text-carousel' );
             $this->add_render_attribute( 'repeating_text_group', 'class', 'slick-dots-' . $settings['dots_position'] );
