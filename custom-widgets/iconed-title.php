@@ -124,9 +124,5 @@ class Iconed_Title extends Widget_Base {
 
     }
 
-    protected function _content_template() {
-
-    }
-
 
 }

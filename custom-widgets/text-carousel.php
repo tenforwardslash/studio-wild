@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Elementor
  *
  */
-class Widget_Text_Carousel extends Widget_Base {
+class Text_Carousel extends Widget_Base {
 
 	public function get_name() {
 		return 'text-carousel';

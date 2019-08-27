@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-class Widget_Portfolio_Category extends Widget_Base {
+class Portfolio_Category extends Widget_Base {
 
 	public function get_name() {
 		return 'portfolio-category';
