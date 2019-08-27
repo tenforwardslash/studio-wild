@@ -23,7 +23,9 @@ class Portfolio_Overview extends Widget_Base {
 		return [ 'studio-wild' ];
 	}
 
-	//todo: add header, desired portfolio category filters, column numbers, pull portfolio from specific type?
+	public function get_script_depends() {
+		return [ 'jquery' ];
+	}
 
 	protected function _register_controls() {
 		$this->start_controls_section(
@@ -51,7 +53,45 @@ class Portfolio_Overview extends Widget_Base {
 			]
 		);
 
-		//TODO: add header section and move items accordingly into overview
+		$this->add_control(
+			'portfolio_items_per_row',
+			[
+				'label' => __( 'Portfolio Items Per Row' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 5,
+						'step' => 1
+					],
+				],
+				'default' => [
+					'size' => 3,
+				],
+			]
+		);
+
+		$this->add_control(
+			'portfolio_items_padding',
+			[
+				'label' => __( 'Portfolio Items Padding' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-items .portfolio-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_portfolio_headers_config',
+			[
+				'label' => __( 'Portfolio Headers Configuration' ),
+			]
+		);
 
 		$this->add_control(
 			'portfolio_header_text',
@@ -256,6 +296,106 @@ class Portfolio_Overview extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_portfolio_item_config',
+			[
+				'label' => __( 'Portfolio Item Configuration' ),
+			]
+		);
+
+		$this->add_control(
+			'portfolio_items_typography_color',
+			[
+				'label' => __( 'Portfolio Items Typography Color' ),
+				'type' => Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => Scheme_Color::get_type(),
+					'value' => Scheme_Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-items .portfolio-item a p' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'portfolio_item_header_typography',
+				'label' => __( 'Portfolio Item Header Typography' ),
+				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_header',
+			]
+		);
+
+		$this->add_control(
+			'portfolio_item_header_margin',
+			[
+				'label' => __( 'Portfolio Item Header Margin' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'portfolio_item_subheader_typography',
+				'label' => __( 'Portfolio Item Subheader Typography' ),
+				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_subheader',
+			]
+		);
+
+		$this->add_control(
+			'portfolio_item_subheader_margin',
+			[
+				'label' => __( 'Portfolio Item Subheader Margin' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_subheader' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'portfolio_item_excerpt_typography',
+				'label' => __( 'Portfolio Item Excerpt Typography' ),
+				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_excerpt',
+			]
+		);
+
+		$this->add_control(
+			'portfolio_item_excerpt_margin',
+			[
+				'label' => __( 'Portfolio Item Excerpt Margin' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_excerpt' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'portfolio_items_overlay',
+			[
+				'label' => __( 'Portfolio Items Overlay' ),
+				'type' => Controls_Manager::TEXT,
+				'label_block' => true,
+				'default' => 'linear-gradient(to bottom, rgba(255,0,0,0), rgba(221,174,60,.7))',
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
@@ -268,11 +408,40 @@ class Portfolio_Overview extends Widget_Base {
 			return;
 		}
 
-		$visible_filters = array('<a class="active" href="#all">All</a>');
+		$visible_filters = [];
 		foreach($settings['portfolio_filters'] as $visible_filter_slug) {
 			$filter_details = get_category_by_slug( $visible_filter_slug );
 			$visible_filters[] = "<a href='#$visible_filter_slug'>$filter_details->name</a>";
-//			error_log(print_r($visible_filter, true));
+		}
+
+		$visible_filters[] = '<a class="active" href="#all">All</a>';
+
+		$posts = get_posts(array(
+			'numberposts'   =>  -1
+		));
+
+		$portfolio_items = [];
+
+		$img_overlay = $settings['portfolio_items_overlay'];
+
+		$item_column_val = intdiv(100, $settings['portfolio_items_per_row']['size']);
+
+		foreach($posts as $portfolio_item) {
+			$post_featured_img = get_the_post_thumbnail_url($portfolio_item->ID);
+			$post_link = get_permalink($portfolio_item->ID);
+			$portfolio_html = "<div class='portfolio-item elementor-column elementor-col-$item_column_val' style='flex-direction: column;'>
+					<a href='$post_link' class='portfolio-item-link'>
+						<div class='portfolio-item-img'>
+							<img src='$post_featured_img'>
+							<div class='portfolio-item-img-overlay' style='background-image: $img_overlay'></div>
+						</div>
+						<p class='portfolio_item_header'>$portfolio_item->post_title</p>
+						<p class='portfolio_item_subheader'>NEED TO TALK TO KENZIE</p>
+						<p class='portfolio_excerpt'>$portfolio_item->post_excerpt</p>
+					</a>
+				</div>";
+
+			$portfolio_items[] = $portfolio_html;
 		}
 
 		$labels_flex_display = $settings['portfolio_labels_display'];
@@ -282,7 +451,17 @@ class Portfolio_Overview extends Widget_Base {
 				<div class='portfolio-filters'>";
 		echo implode('', $visible_filters);
 		echo "	</div>
-			  </div>";
+			  </div><div class='portfolio-items elementor-row'>";
+		echo implode('', $portfolio_items);
+		echo "</div>";
+		?>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				console.log('marianne');
+
+			});
+		</script>
+		<?php
 	}
 
 }
