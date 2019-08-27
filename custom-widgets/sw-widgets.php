@@ -25,6 +25,7 @@ class SW_Elementor_Widgets {
         require_once('logo-hero-cta.php');
         require_once('hero.php');
         require_once('text-carousel.php');
+	    require_once('portfolio-category.php');
 
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
     }
@@ -34,6 +35,7 @@ class SW_Elementor_Widgets {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Logo_Hero_CTA() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Hero() );
 	    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Widget_Text_Carousel() );
+	    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Widget_Portfolio_Category() );
     }
 
 }
