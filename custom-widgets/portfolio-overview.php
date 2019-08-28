@@ -466,7 +466,8 @@ class Portfolio_Overview extends Widget_Base {
 
 		$img_overlay = $settings['portfolio_items_overlay'];
 
-		$item_column_val = intdiv(100, $settings['portfolio_items_per_row']['size']);
+		$items_per_row = $settings['portfolio_items_per_row']['size'];
+		$item_column_val = intdiv(100, $items_per_row);
 
 		foreach($posts as $portfolio_item) {
 			$post_featured_img = get_the_post_thumbnail_url($portfolio_item->ID);
@@ -475,7 +476,8 @@ class Portfolio_Overview extends Widget_Base {
 			$post_categories = get_the_category($portfolio_item->ID);
             $post_category_slugs = implode(' ', array_map(function($c) { return $c->slug; }, $post_categories));
 
-			$portfolio_html = "<div class='portfolio-item elementor-column all elementor-col-$item_column_val $post_category_slugs' style='flex-direction: column;'>
+			$portfolio_html = "<div class='portfolio-item elementor-column all elementor-col-$item_column_val $post_category_slugs' 
+                                style='flex-direction: column;'>
 					<a href='$post_link' class='portfolio-item-link'>
 						<div class='portfolio-item-img'>
 							<img src='$post_featured_img'>
@@ -497,70 +499,103 @@ class Portfolio_Overview extends Widget_Base {
 				<$portfolio_header_tag class='portfolio-header-text'>$portfolio_header_text</$portfolio_header_tag>
 				<div class='portfolio-filters'>";
 		echo implode('', $visible_filters);
-		echo "	</div>
-			  </div><div class='portfolio-items elementor-row'>";
+		echo "</div></div><div class='portfolio-items elementor-row'>";
 		echo implode('', $portfolio_items);
-		echo "</div><div class='portfolio-pagination' style='text-align: $pagination_align'></div>";
+		echo "</div>";
+
+		echo "<div class='portfolio-pagination' style='text-align: $pagination_align'></div>";
 
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				console.log('hot damn this is so much code');
+				console.log('holy fuck this is so much code');
                 var visible = "";
 
+                var totalItems = $('div.portfolio-item').length;
+                var itemsPerPage = <?= $settings['portfolio_items_per_page']?>;
+                var currPage = 1;
+
                 $('div.portfolio-filters').on('click', 'a', function (event) {
+                    $("div.portfolio-item").show();
                     visible = '.' + this.href.slice(this.href.indexOf("#") + 1);
 
                     $('div.portfolio-filters a').removeClass('active');
                     $(this).addClass('active');
-                    pagination();
+
+                    totalItems = $("div.portfolio-item" + visible).length;
+                    $("div.portfolio-item").hide();
+                    $("div.portfolio-item" + visible).show();
+
+                    currPage = 1;
+                    displayPageNums();
                     event.preventDefault();
                 });
 
-                var totalItems = $('div.portfolio-item').length;
-                var itemsPerPage = <?= $settings['portfolio_items_per_page']?>;
-                var min = 0;
-                var max = itemsPerPage;
+                $('div.portfolio-pagination').on('click', 'a.num', function (event) {
+                    console.log('inside of pagination NUMMM');
+                    $('div.portfolio-pagination a.num').removeClass('active');
+                    $(this).addClass('active');
 
-                function pagination(action) {
-                    var totalItems = $("div.portfolio-item" + visible).length;
+                    let desiredPg = parseInt(this.id);
+                    paginate(desiredPg);
 
-                    if (max < totalItems) {//Stop action if max reaches more than total items
-                        //TODO: change this to be page number click
-                        if (action == "next") {
+                    event.preventDefault();
+                });
 
-                            min = min + itemsPerPage;
-                            max = max + itemsPerPage;
+                $('div.portfolio-pagination').on('click', 'a.action', function (event) {
+                    var desiredPg = currPage;
 
-                        }
+                    if ((this.id === 'next' && currPage >= Math.ceil(totalItems / itemsPerPage)) ||
+                        (this.id === 'prev' && currPage <= 1))  {
+                        event.preventDefault();
+                        return;
                     }
 
-                    if (min > 0) {//Stop action if min reaches less than 0
-                        //TODO: change this to be page number click
-                        if (action == "prev") {
-
-                            min = min - itemsPerPage;
-                            max = max - itemsPerPage;
-
-                        }
+                    if (this.id === 'next') {
+                        desiredPg++;
+                        var newActivePageId = parseInt($('div.portfolio-pagination a.active').attr('id')) + 1;
+                    } else if (this.id === 'prev') {
+                        desiredPg--;
+                        var newActivePageId = parseInt($('div.portfolio-pagination a.active').attr('id')) - 1;
                     }
 
+                    paginate(desiredPg);
+
+                    $('div.portfolio-pagination a.num').removeClass('active');
+                    $('div.portfolio-pagination a#' + newActivePageId).addClass('active');
+                    event.preventDefault();
+                });
+
+                function paginate(desiredPg) {
+                    totalItems = $("div.portfolio-item" + visible).length;
                     $("div.portfolio-item").hide();
+
+                    let min = (desiredPg - 1) * itemsPerPage;
+                    let max = min + itemsPerPage;
+
+                    currPage = desiredPg;
+
                     $("div.portfolio-item" + visible).slice(min, max).show();
                 }
 
-                pagination();
+                //recalculates pages to display, always moves the user back to the first page
+                function displayPageNums() {
+                    totalItems = $("div.portfolio-item" + visible).length;
 
-                if (Math.floor(totalItems / itemsPerPage) > 0) {
-                    $( "div.portfolio-pagination" ).append("<span class='portfolio-link'><</span>");
-                    for (var i = 1; i <= Math.floor(totalItems / itemsPerPage); i++) {
-                        let isActive = i === 1 ? 'active' : '';
-                        var paginationLink = "<a href='#' class='portfolio-link " + isActive + "' id='" + i + "'>" + i + "</a>";
-                        console.log('inside of pagination printing loop', paginationLink);
-                        $( "div.portfolio-pagination" ).append( paginationLink );
+                    $( "div.portfolio-pagination" ).empty();
+                    if (totalItems / itemsPerPage > 1) {
+                        $( "div.portfolio-pagination" ).append("<a href='#' class='portfolio-link action' id='prev'><</a>");
+                        for (var i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+                            let isActive = i === 1 ? 'active' : '';
+                            var paginationLink = "<a href='#' class='portfolio-link num " + isActive + "' id='" + i + "'>" + i + "</a>";
+                            $( "div.portfolio-pagination" ).append( paginationLink );
+                        }
+                        $( "div.portfolio-pagination" ).append("<a href='#' class='portfolio-link action' id='next'>></span>");
+                        paginate(currPage);
                     }
-                    $( "div.portfolio-pagination" ).append("<span class='portfolio-link' >></span>");
                 }
+
+                displayPageNums();
 
 			});
 		</script>

@@ -100,6 +100,10 @@ ul.menu li a:hover {
     justify-content: center;
 }
 
+.portfolio-items {
+    flex-wrap: wrap;
+}
+
 .portfolio-items .portfolio-item a:hover p.portfolio_item_header {
     text-decoration: underline;
 }
