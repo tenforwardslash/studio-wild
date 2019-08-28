@@ -515,6 +515,7 @@ class Portfolio_Overview extends Widget_Base {
                 var itemsPerPage = <?= $settings['portfolio_items_per_page']?>;
                 var currPage = 1;
 
+                //handles category filters
                 $('div.portfolio-filters').on('click', 'a', function (event) {
                     $("div.portfolio-item").show();
                     visible = '.' + this.href.slice(this.href.indexOf("#") + 1);
@@ -531,8 +532,8 @@ class Portfolio_Overview extends Widget_Base {
                     event.preventDefault();
                 });
 
+                //handles number pagination
                 $('div.portfolio-pagination').on('click', 'a.num', function (event) {
-                    console.log('inside of pagination NUMMM');
                     $('div.portfolio-pagination a.num').removeClass('active');
                     $(this).addClass('active');
 
@@ -542,6 +543,7 @@ class Portfolio_Overview extends Widget_Base {
                     event.preventDefault();
                 });
 
+                //handles action pagination
                 $('div.portfolio-pagination').on('click', 'a.action', function (event) {
                     var desiredPg = currPage;
 
