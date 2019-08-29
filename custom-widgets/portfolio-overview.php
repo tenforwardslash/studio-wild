@@ -509,6 +509,8 @@ class Portfolio_Overview extends Widget_Base {
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				console.log('holy fuck this is so much code');
+
+
                 var visible = "";
 
                 var totalItems = $('div.portfolio-item').length;
@@ -523,6 +525,8 @@ class Portfolio_Overview extends Widget_Base {
                     $('div.portfolio-filters a').removeClass('active');
                     $(this).addClass('active');
 
+
+                    //TODO: update this to reuse filterItems function
                     totalItems = $("div.portfolio-item" + visible).length;
                     $("div.portfolio-item").hide();
                     $("div.portfolio-item" + visible).show();
@@ -538,7 +542,7 @@ class Portfolio_Overview extends Widget_Base {
                     $(this).addClass('active');
 
                     let desiredPg = parseInt(this.id);
-                    paginate(desiredPg);
+                    filterItems(desiredPg);
 
                     event.preventDefault();
                 });
@@ -561,14 +565,14 @@ class Portfolio_Overview extends Widget_Base {
                         var newActivePageId = parseInt($('div.portfolio-pagination a.active').attr('id')) - 1;
                     }
 
-                    paginate(desiredPg);
+                    filterItems(desiredPg);
 
                     $('div.portfolio-pagination a.num').removeClass('active');
                     $('div.portfolio-pagination a#' + newActivePageId).addClass('active');
                     event.preventDefault();
                 });
 
-                function paginate(desiredPg) {
+                function filterItems(desiredPg) {
                     totalItems = $("div.portfolio-item" + visible).length;
                     $("div.portfolio-item").hide();
 
@@ -593,7 +597,7 @@ class Portfolio_Overview extends Widget_Base {
                             $( "div.portfolio-pagination" ).append( paginationLink );
                         }
                         $( "div.portfolio-pagination" ).append("<a href='#' class='portfolio-link action' id='next'>></span>");
-                        paginate(currPage);
+                        filterItems(currPage);
                     }
                 }
 

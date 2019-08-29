@@ -23,4 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     <nav class="site-navigation" role="navigation">
         <?php wp_nav_menu( array( 'theme_location' => 'menu-1' ) ); ?>
     </nav>
+<!--    <progress value="0" id="progressBar">-->
+<!--        <div class="progress-container">-->
+<!--            <span class="progress-bar"></span>-->
+<!--        </div>-->
+<!--    </progress>-->
 </header>
