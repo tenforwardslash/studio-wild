@@ -167,7 +167,7 @@ class Logo_Hero_CTA extends Widget_Base {
                 <img src='$logo_url' style='object-fit: cover;'/>
             </div>
             <div style='display:flex;align-items: center;justify-content: center;height: 100%;width: 100%;flex-direction: column;text-align: center'>
-            <h1 class='title' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
+            <h1 class='title sw-main-headline' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
             <a href='$cta_url'><button class='sw-button'>$settings[button_text]</button></a>
             <div style='position: absolute; bottom: -20px;'>
                 <img src='$overlay_url' style='object-fit: cover;'/>

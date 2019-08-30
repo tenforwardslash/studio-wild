@@ -1,0 +1,264 @@
+$elementor-mobile-breakpoint: 767px;
+
+nav.site-navigation {
+  justify-content: space-around;
+  background-color: #6A8281;
+}
+header {
+  z-index: 1001;
+  position: sticky;
+  top: 0;
+}
+
+header.tastyheader {
+  display: none;
+  progress {
+    width: 100%;
+    /* Reset the appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Get rid of the default border in Firefox/Opera. */
+    border: none;
+
+    /* Progress bar container for Firefox/IE10+ */
+    background-color: transparent;
+    color: white;
+
+    &::-webkit-progress-bar {
+      background-color: transparent;
+    }
+    &::-webkit-progress-value {
+      background-color: white;
+    }
+    &::-moz-progress-bar {
+      background-color: white;
+    }
+  }
+}
+
+footer.site-footer {
+  /*todo: needs mobile media query*/
+  height: 250px;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
+  nav.footer-navigation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  ul#menu-footer li {
+    font-size: 12px;
+    color: #EBECE7;
+  }
+
+  ul#menu-footer li:not(:first-child):before {
+    content: " | ";
+    margin: 0 5px;
+  }
+
+  img#footer-logo {
+    position: absolute;
+    /*todo: right positioning (and likely sizing) needs media query*/
+    right: 55px;
+    bottom: 15px;
+    width: 150px;
+  }
+  div.menu-footer-container {
+    margin:0 auto 15px;
+  }
+
+  ul#menu-footer {
+    display: flex;
+    list-style-type:none;
+  }
+
+}
+nav.site-navigation {
+  div.menu-main-menu-container {
+    width: 80%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+  ul.menu {
+    padding: 15px;
+    justify-content: space-around;
+    li.current_page_item a {
+      font-family: "proxima-nova", sans-serif;
+      font-size: 18pt;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+    }
+  }
+}
+
+
+ul.menu li a {
+  color: #EBECE7;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+}
+
+ul.menu li a:hover {
+  text-decoration: underline;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portfolio-items {
+  flex-wrap: wrap;
+  .portfolio-item {
+    a {
+      &:hover p.portfolio_item_header {
+        text-decoration: underline;
+      }
+      &:hover div.portfolio-item-img div.portfolio-item-img-overlay {
+        display: block;
+      }
+      div.portfolio-item-img {
+        position: relative;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        img {
+          flex: 1;
+        }
+        div.portfolio-item-img-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: none;
+        }
+      }
+
+    }
+
+  }
+
+}
+
+//.portfolio-items .portfolio-item a:hover p.portfolio_item_header {
+//  text-decoration: underline;
+//}
+//
+//.portfolio-items .portfolio-item a div.portfolio-item-img {
+//  position: relative;
+//  justify-content: center;
+//  display: flex;
+//  flex-direction: row;
+//  overflow: hidden;
+//}
+//
+//.portfolio-items .portfolio-item a div.portfolio-item-img img {
+//  flex: 1;
+//}
+//
+//.portfolio-items .portfolio-item a div.portfolio-item-img div.portfolio-item-img-overlay {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  width: 100%;
+//  height: 100%;
+//  display: none;
+//}
+
+//.portfolio-items .portfolio-item a:hover div.portfolio-item-img div.portfolio-item-img-overlay {
+//  display: block;
+//}
+
+.full-height {
+  height: 100vh;
+}
+
+.sw-button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  font-family: "proxima-nova", sans-serif;
+  letter-spacing: 1.8px;
+  color: #FFFFFF;
+  border: 1px solid #DDAE3C;
+  padding: 12px 24px;
+  text-transform: uppercase;
+}
+
+.sw-button:hover {
+  background-color: #DDAE3C;
+}
+
+/*typography styles
+reduced all pts to 0.66667x
+*/
+.sw-main-headline, .sw-main-headline div * {
+  font-family: "plantin", sans-serif !important;
+  @media (min-width: $elementor-mobile-breakpoint) {
+    font-size: 58px !important; // original: 65pt
+  }
+  @media (max-width: $elementor-mobile-breakpoint) {
+    & {
+      font-size: 42px !important;
+    }
+  }
+}
+
+/* todo:
+    had to include the direct div and h1, otherwise other selectors would override it, even with the !important
+    I'm not sure why... i think its how the typography classes are added
+*/
+.sw-mini-headline div * {
+  font-family: "plantin", sans-serif !important;
+  font-size: 34px !important; // original: 38pt
+  font-weight: 600 !important;
+}
+
+.sw-category-headline {
+  font-family: "proxima-nova", sans-serif !important;
+  letter-spacing: 2.4px !important; // original: 100pt.. which CAN'T be the right answer lol
+  font-size: 21px !important; // original: 24pt
+  text-transform: uppercase !important;
+}
+
+.sw-description-paragraph {
+  font-family: "proxima-nova", sans-serif !important;
+  font-size: 21px !important; // original: 24pt
+}
+
+.sw-body-paragraph {
+  font-family: "proxima-nova", sans-serif !important;
+  font-size: 20px !important; // original: 22pt
+}
+
+.sw-cta {
+  font-family: "proxima-nova", sans-serif !important;
+  font-size: 16px !important; // original: 18pt
+  text-transform: uppercase !important;
+  letter-spacing: 2.4px !important; // original: 100pt
+  font-weight: 700 !important; /* todo: this is because adobe fonts project only has the weights of 400 and 700*/
+}
+
+// Overrides to Elementor widgets. To override, set `CSS Classes` box to ignore-sw-styles
+// styles for elementor image box widget
+*:not(.ignore-sw-styles) {
+  div.elementor-image-box-wrapper {
+    figure.elementor-image-box-img img {
+      width: 145px;
+    }
+    .elementor-image-box-title {
+      @extend .sw-category-headline;
+    }
+    .elementor-image-box-description {
+      @extend .sw-body-paragraph;
+    }
+  }
+}

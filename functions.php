@@ -16,6 +16,11 @@ function studiowild_enqueue_styles() {
         array( $parent_style ),
         wp_get_theme()->get('Version')
     );
+    wp_enqueue_style( 'child-sass-styles',
+        get_stylesheet_directory_uri() . '/studiowild.min.css',
+        array( $parent_style ),
+        wp_get_theme()->get('Version')
+    );
 }
 
 function studiowild_enqueue_scripts() {
