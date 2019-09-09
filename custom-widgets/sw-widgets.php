@@ -27,6 +27,7 @@ class SW_Elementor_Widgets {
         require_once('text-carousel.php');
 	    require_once('portfolio-category.php');
 	    require_once('portfolio-overview.php');
+	    require_once('sw-button.php');
 
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
     }
@@ -38,6 +39,7 @@ class SW_Elementor_Widgets {
 	    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Text_Carousel() );
 	    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Portfolio_Category() );
 	    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Portfolio_Overview() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\SW_Button() );
     }
 
 }
