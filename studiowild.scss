@@ -1,19 +1,25 @@
 $elementor-mobile-breakpoint: 767px;
+$navbar-height: 73px;
+
+// studiowild colors
+$sw-black: #2D2722;
+$sw-grey: #EBECE7;
+$sw-gold: #DDAE3C;
 
 nav.site-navigation {
   justify-content: space-around;
   background-color: #6A8281;
 }
 header {
+  height: $navbar-height;
   z-index: 1001;
   position: sticky;
   top: 0;
-}
-
-header.tastyheader {
-  display: none;
   progress {
     width: 100%;
+    height: 5px;
+    position: absolute;
+    bottom: 0;
     /* Reset the appearance */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -23,22 +29,28 @@ header.tastyheader {
     border: none;
 
     /* Progress bar container for Firefox/IE10+ */
-    background-color: transparent;
-    color: white;
+    color: $sw-grey;
 
     &::-webkit-progress-bar {
       background-color: transparent;
     }
     &::-webkit-progress-value {
-      background-color: white;
+      background-color: $sw-grey;
     }
     &::-moz-progress-bar {
-      background-color: white;
+      background-color: $sw-grey;
     }
   }
 }
 
+header.tastyheader {
+  display: none;
+}
+
 footer.site-footer {
+  &.bg-grey {
+    background-color: $sw-grey;
+  }
   /*todo: needs mobile media query*/
   height: 250px;
   -webkit-background-size: cover;
@@ -53,7 +65,7 @@ footer.site-footer {
   }
   ul#menu-footer li {
     font-size: 12px;
-    color: #EBECE7;
+    color: $sw-grey;
   }
 
   ul#menu-footer li:not(:first-child):before {
@@ -76,8 +88,19 @@ footer.site-footer {
     display: flex;
     list-style-type:none;
   }
-
 }
+//both header and footer menus
+ul.menu li a {
+  font-family: "proxima-nova", sans-serif;
+  color: $sw-grey;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+}
+
+ul.menu li a:hover {
+  text-decoration: underline;
+}
+
 nav.site-navigation {
   div.menu-main-menu-container {
     width: 80%;
@@ -87,24 +110,13 @@ nav.site-navigation {
   ul.menu {
     padding: 15px;
     justify-content: space-around;
+    li a {
+      font-size: 18px;
+    }
     li.current_page_item a {
-      font-family: "proxima-nova", sans-serif;
-      font-size: 18pt;
-      text-transform: uppercase;
-      letter-spacing: 2.4px;
+      font-weight: bold;
     }
   }
-}
-
-
-ul.menu li a {
-  color: #EBECE7;
-  text-transform: uppercase;
-  letter-spacing: 1.8px;
-}
-
-ul.menu li a:hover {
-  text-decoration: underline;
 }
 
 .hero-title {
@@ -148,7 +160,45 @@ ul.menu li a:hover {
 
 }
 
-//.portfolio-items .portfolio-item a:hover p.portfolio_item_header {
+form#form_contact-studio-wild .frm_form_fields {
+  fieldset { border: 0 };
+  .frm_form_field.form-field {
+    margin-bottom: 1rem;
+    input, textarea {
+      background-color: $sw-grey;
+      //todo: for the grey bg
+      // background-color: white;
+      border: 0;
+      font-family: "proxima-nova", sans-serif;
+      letter-spacing: 1.8px;
+      opacity: 0.5;
+      color: $sw-black;
+      &::placeholder {
+        color: $sw-black;
+      }
+    }
+  }
+
+  .frm_submit {
+    display: flex;
+    button {
+      margin: auto;
+    }
+  }
+}
+
+section.bg-grey {
+  background-color: $sw-grey;
+  form#form_contact-studio-wild .frm_form_fields {
+    .frm_form_field.form-field {
+      input, textarea {
+        background-color: white;
+      }
+    }
+  }
+}
+
+  //.portfolio-items .portfolio-item a:hover p.portfolio_item_header {
 //  text-decoration: underline;
 //}
 //
@@ -181,6 +231,10 @@ ul.menu li a:hover {
   height: 100vh;
 }
 
+.full-height-with-navbar {
+  height: calc(100vh - #{$navbar-height});
+}
+
 .sw-button {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -188,13 +242,17 @@ ul.menu li a:hover {
   font-family: "proxima-nova", sans-serif;
   letter-spacing: 1.8px;
   color: #FFFFFF;
-  border: 1px solid #DDAE3C;
-  padding: 12px 24px;
+  border: 1px solid $sw-gold;
   text-transform: uppercase;
-}
-
-.sw-button:hover {
-  background-color: #DDAE3C;
+  height: 35px;
+  width: 175px;
+  font-size: 0.8rem;
+  &:hover, &:focus {
+    background-color: $sw-gold;
+  }
+  &.button-dark {
+    color: #2d2722;
+  }
 }
 
 /*typography styles
@@ -206,9 +264,7 @@ reduced all pts to 0.66667x
     font-size: 58px !important; // original: 65pt
   }
   @media (max-width: $elementor-mobile-breakpoint) {
-    & {
-      font-size: 42px !important;
-    }
+    font-size: 42px !important;
   }
 }
 
@@ -216,7 +272,7 @@ reduced all pts to 0.66667x
     had to include the direct div and h1, otherwise other selectors would override it, even with the !important
     I'm not sure why... i think its how the typography classes are added
 */
-.sw-mini-headline div * {
+.sw-mini-headline, .sw-mini-headline div * {
   font-family: "plantin", sans-serif !important;
   font-size: 34px !important; // original: 38pt
   font-weight: 600 !important;
