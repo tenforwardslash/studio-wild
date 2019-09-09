@@ -12,7 +12,7 @@
                     $('header.tastyheader').slideDown(500);
                 } else {
                     //todo: see if she wants to hide when you scroll all the way up
-                    $('header.tastyheader').slideUp(500)
+                    // $('header.tastyheader').slideUp(500)
                 }
             });
         });

@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header class="tastyheader very-sticky">
+<header class="<?= is_front_page() ? 'tastyheader' : ''?> very-sticky">
     <nav class="site-navigation" role="navigation">
         <?php wp_nav_menu( array( 'theme_location' => 'menu-1' ) ); ?>
     </nav>
-<!--    <progress value="0" id="progressBar">-->
-<!--        <div class="progress-container">-->
-<!--            <span class="progress-bar"></span>-->
-<!--        </div>-->
-<!--    </progress>-->
+    <progress value="0" id="progressBar">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
 </header>
