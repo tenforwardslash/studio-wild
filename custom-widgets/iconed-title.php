@@ -119,7 +119,7 @@ class Iconed_Title extends Widget_Base {
         $header_tag = $settings['header_size'];
         echo "<div style='display:flex'>
                 <div style='$style;'></div>
-                <$header_tag style='margin-top: 0;margin-bottom:0;' class='title'>$settings[title]</$header_tag>
+                <$header_tag style='margin-top: 0;margin-bottom:0;' class='sw-mini-headline title'>$settings[title]</$header_tag>
               </div>";
 
     }

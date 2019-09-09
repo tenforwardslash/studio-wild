@@ -174,7 +174,8 @@ class Hero extends Widget_Base {
 //        $background_url = $settings['background']['url'];
         error_log(print_r($settings['button_link'], true), 0);
         $header_class = $settings['disable_typography_defaults'] == true ? 'hero-title-header' : 'sw-main-headline';
-        echo "<div class='full-height hero-wrap' style='position: relative;'>
+        // todo: should we be checking to see if the navbar is gonna roll down or not?
+        echo "<div class='full-height-with-navbar hero-wrap' style='position: relative;'>
             <!-- <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='' style='object-fit: cover;'/>
             </div> -->

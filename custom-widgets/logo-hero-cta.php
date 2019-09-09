@@ -159,7 +159,17 @@ class Logo_Hero_CTA extends Widget_Base {
         $logo_url = $settings['logo']['url'];
         $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
 //        $background_url = $settings['background']['url'];
-        $cta_url = $settings['button_link']['url'];
+        if ( ! empty( $settings['button_link']['url'] ) ) {
+            $this->add_render_attribute( 'sw-button', 'href', $settings['button_link']['url'] );
+
+            if ( $settings['button_link']['is_external'] ) {
+                $this->add_render_attribute( 'sw-button', 'target', '_blank' );
+            }
+
+            if ( $settings['button_link']['nofollow'] ) {
+                $this->add_render_attribute( 'sw-button', 'rel', 'nofollow' );
+            }
+        }
         $overlay_url = $settings['image-overlay-bottom']['url'];
         error_log(print_r($settings['button_link'], true), 0);
         echo "<div class='full-height logo-hero-cta-wrap' style='position: relative;'>
@@ -168,7 +178,7 @@ class Logo_Hero_CTA extends Widget_Base {
             </div>
             <div style='display:flex;align-items: center;justify-content: center;height: 100%;width: 100%;flex-direction: column;text-align: center'>
             <h1 class='title sw-main-headline' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
-            <a href='$cta_url'><button class='sw-button'>$settings[button_text]</button></a>
+            <a " . $this->get_render_attribute_string( 'sw-button' ) . "><button class='sw-button'>$settings[button_text]</button></a>
             <div style='position: absolute; bottom: -20px;'>
                 <img src='$overlay_url' style='object-fit: cover;'/>
             </div>
