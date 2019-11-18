@@ -94,6 +94,36 @@ class Logo_Hero_CTA extends Widget_Base {
             ]
         );
 
+	    $this->add_responsive_control(
+		    'logo_position',
+		    [
+			    'label' => __( 'Logo Left Position', 'elementor' ),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'min' => 0,
+					    'max' => 500,
+				    ],
+			    ],
+			    'devices' => [ 'desktop', 'tablet', 'mobile' ],
+			    'desktop_default' => [
+				    'size' => 40,
+				    'unit' => 'px',
+			    ],
+			    'tablet_default' => [
+				    'size' => 40,
+				    'unit' => 'px',
+			    ],
+			    'mobile_default' => [
+				    'size' => 10,
+				    'unit' => 'px',
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .logo-image' => 'left: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
         $this->add_responsive_control(
             'logo_size',
             [
@@ -150,6 +180,40 @@ class Logo_Hero_CTA extends Widget_Base {
                 'placeholder' => __( 'Button Text', 'elementor' ),
             ]
         );
+
+	    $this->add_responsive_control(
+		    'button_margin',
+		    [
+			    'label' => __( 'Button Margin', 'elementor' ),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'devices' => [ 'desktop', 'tablet', 'mobile' ],
+			    'desktop_default' => [
+				    'top' => '40',
+				    'right' => '40',
+				    'bottom' => '40',
+				    'left' => '40',
+				    'isLinked' => true,
+			    ],
+			    'tablet_default' => [
+				    'top' => '20',
+				    'right' => '20',
+				    'bottom' => '20',
+				    'left' => '20',
+				    'isLinked' => true,
+			    ],
+			    'mobile_default' => [
+				    'top' => '10',
+				    'right' => '10',
+				    'bottom' => '10',
+				    'left' => '10',
+				    'isLinked' => true,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .sw-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_section();
     }
