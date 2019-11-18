@@ -171,18 +171,17 @@ class Logo_Hero_CTA extends Widget_Base {
             }
         }
         $overlay_url = $settings['image-overlay-bottom']['url'];
-        error_log(print_r($settings['button_link'], true), 0);
         echo "<div class='full-height logo-hero-cta-wrap' style='position: relative;'>
-            <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
-                <img src='$logo_url' style='object-fit: cover;'/>
+            <div class='logo-image'>
+                <img src='$logo_url'/>
             </div>
-            <div style='display:flex;align-items: center;justify-content: center;height: 100%;width: 100%;flex-direction: column;text-align: center'>
-            <h1 class='title sw-main-headline' style='color:white;text-shadow: 0px 0px 15px #000000;'>$settings[title]</h1>
-            <a " . $this->get_render_attribute_string( 'sw-button' ) . "><button class='sw-button'>$settings[button_text]</button></a>
-            <div style='position: absolute; bottom: -20px;'>
-                <img src='$overlay_url' style='object-fit: cover;'/>
+            <div class='text-wrapper'>
+                <h1 class='title sw-main-headline'>$settings[title]</h1>
+                <a " . $this->get_render_attribute_string( 'sw-button' ) . "><button class='sw-button'>$settings[button_text]</button></a>
+                <div class='overlay'>
+                    <img src='$overlay_url'/>
+                </div>
             </div>
-</div>
         </div>";
 
     }

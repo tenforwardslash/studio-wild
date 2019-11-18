@@ -1,5 +1,5 @@
 $elementor-mobile-breakpoint: 767px;
-$navbar-height: 73px;
+$navbar-height: 63px;
 
 // studiowild colors
 $sw-black: #2D2722;
@@ -48,9 +48,9 @@ header.tastyheader {
 }
 
 footer.site-footer {
-  &.bg-grey {
-    background-color: $sw-grey;
-  }
+  //&.bg-grey {
+  //  background-color: $sw-grey;
+  //}
   /*todo: needs mobile media query*/
   height: 250px;
   -webkit-background-size: cover;
@@ -108,7 +108,7 @@ nav.site-navigation {
     -moz-osx-font-smoothing: auto;
   }
   ul.menu {
-    padding: 15px;
+    padding: 10px;
     justify-content: space-around;
     li a {
       font-size: 18px;
@@ -255,9 +255,7 @@ section.bg-grey {
   }
 }
 
-/*typography styles
-reduced all pts to 0.66667x
-*/
+/*typography styles*/
 .sw-main-headline, .sw-main-headline div * {
   font-family: "plantin", sans-serif !important;
   @media (min-width: $elementor-mobile-breakpoint) {

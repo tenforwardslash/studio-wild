@@ -1,0 +1,30 @@
+.elementor-widget-logo-hero-cta {
+  div.logo-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    img {
+      object-fit: cover;
+    }
+  }
+  div.text-wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    h1.title.sw-main-headline {
+      color:white;
+      text-shadow: 0px 0px 15px #000000;
+    }
+    div.overlay {
+      position: absolute;
+      bottom: -20px;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}

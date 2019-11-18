@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<footer id="site-footer" class="site-footer" role="contentinfo" style="background-image: url(<?= get_stylesheet_directory_uri() . '/assets/images/trees-footer.svg' ?>)">
+<footer id="site-footer" class="site-footer" role="contentinfo" style="background-image: url(<?= get_stylesheet_directory_uri() . '/assets/images/trees-footer.svg' ?>); background-color: <?= get_field('footer_background_color')?>">
     <nav class="footer-navigation" role="navigation">
         <?php wp_nav_menu( array( 'menu' => 'Footer' ) ); ?>
     </nav>

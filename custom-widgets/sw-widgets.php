@@ -29,7 +29,21 @@ class SW_Elementor_Widgets {
 	    require_once('portfolio-overview.php');
 	    require_once('sw-button.php');
 
+        add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'widget_styles' ] );
+        add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
+
+    }
+
+    public function widget_styles() {
+        wp_register_style( 'logo-hero-cta',  get_stylesheet_directory_uri() . '/custom-widgets/css/logo-hero-cta.min.css');
+        wp_enqueue_style('logo-hero-cta');
+
+    }
+
+    public function widget_scripts() {
+        wp_register_script( 'logo-hero-cta-js', get_stylesheet_directory_uri() . '/custom-widgets/js/logo-hero-cta.js', [ 'jquery' ] );
+        wp_enqueue_script('logo-hero-cta-js');
     }
 
     public function register_widgets() {
