@@ -46,22 +46,23 @@ class Hero extends Widget_Base {
                 'default' => __( 'Add Your Heading Text Here', 'elementor' ),
             ]
         );
+
         // todo: add to all widgets
-        $this->add_control(
-            'disable_typography_defaults',
-            [
-                'label' => __( 'Disable Studio Wild Typography Defaults', 'elementor' ),
-                'type' => Controls_Manager::SWITCHER,
-            ]
-        );
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'title_typography',
-                'label' => __( 'Title Typography (only if above Defaults disabled)', 'elementor' ),
-                'selector' => '{{WRAPPER}} .hero-title-header',
-            ]
-        );
+//        $this->add_control(
+//            'disable_typography_defaults',
+//            [
+//                'label' => __( 'Disable Studio Wild Typography Defaults', 'elementor' ),
+//                'type' => Controls_Manager::SWITCHER,
+//            ]
+//        );
+//        $this->add_group_control(
+//            Group_Control_Typography::get_type(),
+//            [
+//                'name' => 'title_typography',
+//                'label' => __( 'Title Typography (only if above Defaults disabled)', 'elementor' ),
+//                'selector' => '{{WRAPPER}} .hero-title-header',
+//            ]
+//        );
         $this->add_responsive_control(
             'title-max-width',
             [
@@ -177,7 +178,7 @@ class Hero extends Widget_Base {
                 <img src='' style='object-fit: cover;'/>
             </div> -->
             <div class='hero-title'>
-                <h1 class='hero-title-header' style='color:white;'>$settings[title]</h1>
+                <h1 style='color:white;'>$settings[title]</h1>
             </div>
         </div>";
 

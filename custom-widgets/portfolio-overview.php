@@ -245,6 +245,19 @@ class Portfolio_Overview extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'pagination_margins',
+			[
+				'label' => __( 'Pagination Margin' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-pagination' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -356,7 +369,7 @@ class Portfolio_Overview extends Widget_Base {
 					'value' => Scheme_Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .portfolio-items .portfolio-item a p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .portfolio-items .portfolio-item a > *' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -366,7 +379,7 @@ class Portfolio_Overview extends Widget_Base {
 			[
 				'name' => 'portfolio_item_header_typography',
 				'label' => __( 'Portfolio Item Header Typography' ),
-				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_header',
+				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item h3',
 			]
 		);
 
@@ -378,7 +391,7 @@ class Portfolio_Overview extends Widget_Base {
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .portfolio-items .portfolio-item h3' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -483,7 +496,7 @@ class Portfolio_Overview extends Widget_Base {
 							<img src='$post_featured_img'>
 							<div class='portfolio-item-img-overlay' style='background-image: $img_overlay'></div>
 						</div>
-						<p class='portfolio_item_header'>$portfolio_item->post_title</p>
+						<h3>$portfolio_item->post_title</h3>
 						<p class='portfolio_item_subheader'>NEED TO TALK TO KENZIE</p>
 						<p class='portfolio_excerpt'>$portfolio_item->post_excerpt</p>
 					</a>
@@ -508,9 +521,6 @@ class Portfolio_Overview extends Widget_Base {
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				console.log('holy fuck this is so much code');
-
-
                 var visible = "";
 
                 var totalItems = $('div.portfolio-item').length;

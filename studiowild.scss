@@ -70,14 +70,14 @@ footer.site-footer {
 
   ul#menu-footer li:not(:first-child):before {
     content: " | ";
-    margin: 0 5px;
+    margin: 0 20px;
   }
 
   img#footer-logo {
     position: absolute;
     /*todo: right positioning (and likely sizing) needs media query*/
     right: 55px;
-    bottom: 15px;
+    bottom: 10px;
     width: 150px;
   }
   div.menu-footer-container {
@@ -129,7 +129,7 @@ nav.site-navigation {
   flex-wrap: wrap;
   .portfolio-item {
     a {
-      &:hover p.portfolio_item_header {
+      &:hover h3 {
         text-decoration: underline;
       }
       &:hover div.portfolio-item-img div.portfolio-item-img-overlay {
@@ -255,49 +255,16 @@ section.bg-grey {
 }
 
 /*typography styles*/
-//.sw-category-headline {
-//    @extend .elementor-heading-title !optional;
-
-
-  //font-family: "proxima-nova", sans-serif !important;
-  //letter-spacing: 2.4px !important; // original: 100pt.. which CAN'T be the right answer lol
-  //font-size: 21px !important; // original: 24pt
-  //text-transform: uppercase !important;
-//}
-
-//.sw-category-headline {
-//}
 
 .sw-description-paragraph {
   font-family: "proxima-nova", sans-serif !important;
   font-size: 21px !important; // original: 24pt
 }
 
-.sw-body-paragraph {
-  font-family: "proxima-nova", sans-serif !important;
-  font-size: 20px !important; // original: 22pt
-}
-
-.sw-cta {
-  font-family: "proxima-nova", sans-serif !important;
-  font-size: 16px !important; // original: 18pt
-  text-transform: uppercase !important;
-  letter-spacing: 2.4px !important; // original: 100pt
-  font-weight: 700 !important; /* todo: this is because adobe fonts project only has the weights of 400 and 700*/
-}
-
-// Overrides to Elementor widgets. To override, set `CSS Classes` box to ignore-sw-styles
-// styles for elementor image box widget
-*:not(.ignore-sw-styles) {
-  div.elementor-image-box-wrapper {
-    figure.elementor-image-box-img img {
-      width: 145px;
-    }
-    //.elementor-image-box-title {
-    //  @extend .sw-category-headline;
-    //}
-    .elementor-image-box-description {
-      @extend .sw-body-paragraph;
-    }
-  }
-}
+//.sw-cta {
+//  font-family: "proxima-nova", sans-serif !important;
+//  font-size: 16px !important; // original: 18pt
+//  text-transform: uppercase !important;
+//  letter-spacing: 2.4px !important; // original: 100pt
+//  font-weight: 700 !important; /* todo: this is because adobe fonts project only has the weights of 400 and 700*/
+//}
