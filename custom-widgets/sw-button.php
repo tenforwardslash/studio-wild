@@ -60,6 +60,7 @@ class SW_Button extends Widget_Base {
                 ],
             ]
         );
+
         $this->add_control(
             'button_color',
             [

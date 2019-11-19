@@ -169,18 +169,15 @@ class Hero extends Widget_Base {
     protected function render() {
 
         $settings = $this->get_settings_for_display();
-//        $logo_url = $settings['logo']['url'];
-//        $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
-//        $background_url = $settings['background']['url'];
         error_log(print_r($settings['button_link'], true), 0);
-        $header_class = $settings['disable_typography_defaults'] == true ? 'hero-title-header' : 'sw-main-headline';
+//        $header_class = $settings['disable_typography_defaults'] == true ? 'hero-title-header' : 'sw-main-headline';
         // todo: should we be checking to see if the navbar is gonna roll down or not?
         echo "<div class='full-height-with-navbar hero-wrap' style='position: relative;'>
             <!-- <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='' style='object-fit: cover;'/>
             </div> -->
             <div class='hero-title'>
-                <h1 class='$header_class' style='color:white;'>$settings[title]</h1>
+                <h1 class='hero-title-header' style='color:white;'>$settings[title]</h1>
             </div>
         </div>";
 

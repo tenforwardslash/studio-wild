@@ -255,32 +255,18 @@ section.bg-grey {
 }
 
 /*typography styles*/
-.sw-main-headline, .sw-main-headline div * {
-  font-family: "plantin", sans-serif !important;
-  @media (min-width: $elementor-mobile-breakpoint) {
-    font-size: 58px !important; // original: 65pt
-  }
-  @media (max-width: $elementor-mobile-breakpoint) {
-    font-size: 42px !important;
-  }
-}
+//.sw-category-headline {
+//    @extend .elementor-heading-title !optional;
 
-/* todo:
-    had to include the direct div and h1, otherwise other selectors would override it, even with the !important
-    I'm not sure why... i think its how the typography classes are added
-*/
-.sw-mini-headline, .sw-mini-headline div * {
-  font-family: "plantin", sans-serif !important;
-  font-size: 34px !important; // original: 38pt
-  font-weight: 600 !important;
-}
 
-.sw-category-headline {
-  font-family: "proxima-nova", sans-serif !important;
-  letter-spacing: 2.4px !important; // original: 100pt.. which CAN'T be the right answer lol
-  font-size: 21px !important; // original: 24pt
-  text-transform: uppercase !important;
-}
+  //font-family: "proxima-nova", sans-serif !important;
+  //letter-spacing: 2.4px !important; // original: 100pt.. which CAN'T be the right answer lol
+  //font-size: 21px !important; // original: 24pt
+  //text-transform: uppercase !important;
+//}
+
+//.sw-category-headline {
+//}
 
 .sw-description-paragraph {
   font-family: "proxima-nova", sans-serif !important;
@@ -307,9 +293,9 @@ section.bg-grey {
     figure.elementor-image-box-img img {
       width: 145px;
     }
-    .elementor-image-box-title {
-      @extend .sw-category-headline;
-    }
+    //.elementor-image-box-title {
+    //  @extend .sw-category-headline;
+    //}
     .elementor-image-box-description {
       @extend .sw-body-paragraph;
     }

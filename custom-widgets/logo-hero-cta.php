@@ -46,14 +46,19 @@ class Logo_Hero_CTA extends Widget_Base {
                 'default' => __( 'Add Your Heading Text Here', 'elementor' ),
             ]
         );
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'title_typography',
-                'label' => __( 'Title Typography', 'elementor' ),
-                'selector' => '{{WRAPPER}} .title',
-            ]
-        );
+
+	    $this->add_control(
+		    'header_color',
+		    [
+			    'label' => __( 'Main Header Color', 'elementor' ),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '#ffffff',
+			    'selectors' => [
+				    "{{WRAPPER}} .title" => 'color: {{UNIT}};'
+			    ],
+		    ]
+	    );
+
         $this->add_responsive_control(
             'title-padding',
             [
@@ -240,7 +245,7 @@ class Logo_Hero_CTA extends Widget_Base {
                 <img src='$logo_url'/>
             </div>
             <div class='text-wrapper'>
-                <h1 class='title sw-main-headline'>$settings[title]</h1>
+                <h1 class='title'>$settings[title]</h1>
                 <a " . $this->get_render_attribute_string( 'sw-button' ) . "><button class='sw-button'>$settings[button_text]</button></a>
                 <div class='overlay'>
                     <img src='$overlay_url'/>
