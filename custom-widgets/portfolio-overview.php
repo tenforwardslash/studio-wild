@@ -299,6 +299,19 @@ class Portfolio_Overview extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'portfolio_header_padding',
+			[
+				'label' => __( 'Portfolio Header Padding' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'label_block' => true,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .portfolio-header-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -487,6 +500,7 @@ class Portfolio_Overview extends Widget_Base {
 			$post_link = get_permalink($portfolio_item->ID);
 
 			$post_categories = get_the_category($portfolio_item->ID);
+			$post_category_names = implode(', ', array_map(function($c) { return $c->name; }, $post_categories));
             $post_category_slugs = implode(' ', array_map(function($c) { return $c->slug; }, $post_categories));
 
 			$portfolio_html = "<div class='portfolio-item elementor-column all elementor-col-$item_column_val $post_category_slugs' 
@@ -497,7 +511,7 @@ class Portfolio_Overview extends Widget_Base {
 							<div class='portfolio-item-img-overlay' style='background-image: $img_overlay'></div>
 						</div>
 						<h3>$portfolio_item->post_title</h3>
-						<p class='portfolio_item_subheader'>NEED TO TALK TO KENZIE</p>
+						<p class='portfolio_item_subheader'>$post_category_names</p>
 						<p class='portfolio_excerpt'>$portfolio_item->post_excerpt</p>
 					</a>
 				</div>";

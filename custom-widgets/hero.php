@@ -178,7 +178,7 @@ class Hero extends Widget_Base {
                 <img src='' style='object-fit: cover;'/>
             </div> -->
             <div class='hero-title'>
-                <h1 style='color:white;'>$settings[title]</h1>
+                <h1 class='sk-text-dark'>$settings[title]</h1>
             </div>
         </div>";
 

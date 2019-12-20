@@ -241,7 +241,7 @@ section.bg-grey {
   border-radius: 0;
   font-family: "proxima-nova", sans-serif;
   letter-spacing: 1.8px;
-  color: #FFFFFF;
+  color: $sw-grey;
   border: 1px solid $sw-gold;
   text-transform: uppercase;
   width: 175px;
@@ -251,6 +251,9 @@ section.bg-grey {
   }
   &.button-dark {
     color: #2d2722;
+  }
+  &.button-dark:hover {
+    color: $sw-grey;
   }
 }
 
