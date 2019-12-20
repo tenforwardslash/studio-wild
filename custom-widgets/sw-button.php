@@ -60,12 +60,13 @@ class SW_Button extends Widget_Base {
                 ],
             ]
         );
+
         $this->add_control(
             'button_color',
             [
                 'label' => __( 'Color', 'elementor' ),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#575757',
+                'default' => '#2D2722',
                 'selectors' => [
                     "{{WRAPPER}} .sw-button" => 'color: {{UNIT}};',
                     "{{WRAPPER}} .sw-button:hover, {{WRAPPER}} .sw-button:focus" => 'color: #ffffff;',
