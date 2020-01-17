@@ -147,16 +147,30 @@ footer.site-footer {
     content: " | ";
     margin: 0 20px;
   }
-
-  img#footer-logo {
+  div.footer-logo-container {
     position: absolute;
-    /*todo: right positioning (and likely sizing) needs media query*/
-    right: 55px;
     bottom: 10px;
-    width: 150px;
+    width: 100%;
   }
+  img#footer-logo {
+    width: 150px;
+    @media (max-width:$elementor-mobile-breakpoint) {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width:$elementor-mobile-breakpoint+1) {
+      position: absolute;
+      right: 55px;
+      bottom: 10px;
+    }
+  }
+
   div.menu-footer-container {
     margin:0 auto 15px;
+    @media (max-width:$elementor-mobile-breakpoint) {
+      margin:0 auto 85px;
+    }
   }
 
   ul#menu-footer {

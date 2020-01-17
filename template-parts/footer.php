@@ -16,5 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <nav class="footer-navigation" role="navigation">
         <?php wp_nav_menu( array( 'menu' => 'Footer' ) ); ?>
     </nav>
-    <img id="footer-logo" src="<?= get_stylesheet_directory_uri() . '/assets/images/StudioWild_Logo_820x440_White@2x.png'?>" />
+    <div class="footer-logo-container">
+        <img id="footer-logo" src="<?= get_stylesheet_directory_uri() . '/assets/images/StudioWild_Logo_820x440_White@2x.png'?>" />
+    </div>
 </footer>
