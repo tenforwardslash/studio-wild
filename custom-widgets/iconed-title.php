@@ -86,22 +86,65 @@ class Iconed_Title extends Widget_Base {
                 'placeholder' => __( 'Icon to Precede Header', 'elementor' ),
             ]
         );
-
-        $this->add_control(
+        $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __( 'Size', 'plugin-name' ),
+                'label' => __( 'Size', 'elementor' ),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
-                        'min' => 10,
-                        'max' => 100,
+                        'min' => 50,
+                        'max' => 400,
                     ],
                 ],
-                'default' => [
-                    'unit' => 'px',
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
                     'size' => 20,
+                    'unit' => 'px',
+                ],
+                'tablet_default' => [
+                    'size' => 20,
+                    'unit' => 'px',
+                ],
+                'mobile_default' => [
+                    'size' => 20,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .icon-image' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'icon_margin',
+            [
+                'label' => __( 'Icon Margin', 'elementor' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
+                    'top' => '0',
+                    'right' => '15',
+                    'bottom' => '0',
+                    'left' => '0',
+                    'isLinked' => false,
+                ],
+                'tablet_default' => [
+                    'top' => '0',
+                    'right' => '15',
+                    'bottom' => '0',
+                    'left' => '0',
+                    'isLinked' => false,
+                ],
+                'mobile_default' => [
+                    'top' => '0',
+                    'right' => '20',
+                    'bottom' => '0',
+                    'left' => '0',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .icon-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -114,11 +157,10 @@ class Iconed_Title extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
         $icon_url = $settings['icon']['url'];
-        $icon_size = $settings['icon_size']['size'] . $settings['icon_size']['unit'];
-        $style = "background: center / contain no-repeat url($icon_url);width:$icon_size;height:auto;margin:0 15px 0 0;";
+        $style = "background: center / contain no-repeat url($icon_url);height:auto;";
         $header_tag = $settings['header_size'];
         echo "<div style='display:flex'>
-                <div style='$style;'></div>
+                <div class='icon-image' style='$style;'></div>
                 <$header_tag style='margin-top: 0;margin-bottom:0;' class='title'>$settings[title]</$header_tag>
               </div>";
 

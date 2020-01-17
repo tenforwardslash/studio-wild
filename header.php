@@ -21,6 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <header class="<?= is_front_page() ? 'tastyheader' : ''?> very-sticky">
     <nav class="site-navigation" role="navigation">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <?php wp_nav_menu( array( 'theme_location' => 'menu-1' ) ); ?>
     </nav>
     <progress value="0" id="progressBar">
