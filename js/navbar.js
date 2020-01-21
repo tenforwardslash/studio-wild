@@ -1,15 +1,15 @@
 (function ($) {
     $(document).ready(function(){
-        if ($(this).scrollTop() > 10) {
-            $('header.tastyheader').slideDown(500);
-        }
-        $(document).ready(function() {
-            //toggle menu
-            $('#menu-btn').click(function(){
-                $('.navicon').toggleClass('close');
-                $('header.sw-header').toggleClass('mobile-opened');
-                $('progress#progressBar').toggle();
-            })
+        // set full window height classes' heights to the size of the window
+        //  **YES, this isn't strictly navbar code... but a whole new file for two friggin lines feels like overkill??**
+        $('.full-window-height').css('height', $(window).height());
+        $('.full-window-height-with-navbar').css('height', $(window).height()-63);
+
+        // expand mobile menu and hide progress bar on hamburger click
+        $('#menu-btn').click(function(){
+            $('.navicon').toggleClass('close');
+            $('header.sw-header').toggleClass('mobile-opened');
+            $('progress#progressBar').toggle();
         });
 
         // fade in .navbar
@@ -22,6 +22,7 @@
             });
         });
 
+        // progress bar
         $(function() {
             // https://css-tricks.com/reading-position-indicator/
 
