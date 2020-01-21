@@ -6,7 +6,6 @@
         $(document).ready(function() {
             //toggle menu
             $('#menu-btn').click(function(){
-                console.log("clicked");
                 $('.navicon').toggleClass('close');
                 $('header.sw-header').toggleClass('mobile-opened');
                 $('progress#progressBar').toggle();
