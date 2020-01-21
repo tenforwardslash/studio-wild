@@ -6,12 +6,12 @@ $sw-black: #2D2722;
 $sw-grey: #EBECE7;
 $sw-gold: #DDAE3C;
 
-nav.site-navigation {
-  justify-content: space-around;
-  background-color: #6A8281;
-}
+//nav.site-navigation {
+//  justify-content: space-around;
+//}
 header {
   height: $navbar-height;
+  background-color: #6A8281;
   z-index: 1001;
   position: sticky;
   top: 0;
@@ -41,7 +41,140 @@ header {
       background-color: $sw-grey;
     }
   }
+  nav.site-navigation {
+    div.menu-main-menu-container {
+      width: 80%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: auto;
+      margin: auto;
+      ul.menu {
+        padding: 10px;
+        justify-content: space-around;
+        clear: both;
+        max-height: 0;
+        overflow:hidden;
+        transition: max-height .2s ease-out;
+        @media (min-width: 48em) {
+          clear: none;
+          max-height: none;
+        }
+        li a {
+          font-size: 18px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        li.current_page_item a {
+          font-weight: bold;
+        }
+        @media (min-width: 48em) {
+          li {
+            float: left;
+          }
+        }
+      }
+    }
+    .menu-icon {
+      cursor: pointer;
+      float: right;
+      padding: 28px 20px;
+      position: relative;
+      user-select: none;
+      display: inline-block;
+
+      @media (min-width: 48em) {
+        display: none;
+      }
+
+      .navicon {
+        background: $sw-grey;
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 18px;
+        &:before,&:after{
+          background: $sw-grey;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          transition: all .2s ease-out;
+          width: 100%;
+        }
+        &:before {
+          top: 5px;
+        }
+        &:after {
+          top: -5px;
+        }
+        &.close {
+          background: transparent;
+          &:after {
+            transform: rotate(45deg);
+            top: 0;
+          }
+          &:before {
+            transform: rotate(-45deg);
+            top: 0;
+          }
+        }
+      }
+    }
+
+    .menu-btn {
+      display: none;
+    }
+  }
+
+  &.mobile-opened {
+    height: unset;
+    opacity: 0.95;
+
+    nav.site-navigation {
+      flex-direction: column-reverse;
+      div.menu-main-menu-container {
+        ul.menu {
+          clear: none;
+          max-height: none;
+          flex-direction: column;
+          align-items: center;
+          li {
+            padding: 10px 0;
+          }
+        }
+      }
+      label.menu-icon {
+        align-self: flex-end;
+      }
+    }
+  }
 }
+//
+//
+//ul.menu li a:hover {
+//  text-decoration: underline;
+//}
+//
+//nav.site-navigation {
+//  div.menu-main-menu-container {
+//    width: 80%;
+//    -webkit-font-smoothing: antialiased;
+//    -moz-osx-font-smoothing: auto;
+//    margin: auto;
+//  }
+//  ul.menu {
+//    padding: 10px;
+//    justify-content: space-around;
+//    li a {
+//      font-size: 18px;
+//    }
+//    li.current_page_item a {
+//      font-weight: bold;
+//    }
+//  }
+//}
+
 
 header.tastyheader {
   display: none;
@@ -72,16 +205,30 @@ footer.site-footer {
     content: " | ";
     margin: 0 20px;
   }
-
-  img#footer-logo {
+  div.footer-logo-container {
     position: absolute;
-    /*todo: right positioning (and likely sizing) needs media query*/
-    right: 55px;
     bottom: 10px;
-    width: 150px;
+    width: 100%;
   }
+  img#footer-logo {
+    width: 150px;
+    @media (max-width:$elementor-mobile-breakpoint) {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width:$elementor-mobile-breakpoint+1) {
+      position: absolute;
+      right: 55px;
+      bottom: 10px;
+    }
+  }
+
   div.menu-footer-container {
     margin:0 auto 15px;
+    @media (max-width:$elementor-mobile-breakpoint) {
+      margin:0 auto 85px;
+    }
   }
 
   ul#menu-footer {
@@ -95,28 +242,6 @@ ul.menu li a {
   color: $sw-grey;
   text-transform: uppercase;
   letter-spacing: 1.8px;
-}
-
-ul.menu li a:hover {
-  text-decoration: underline;
-}
-
-nav.site-navigation {
-  div.menu-main-menu-container {
-    width: 80%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: auto;
-  }
-  ul.menu {
-    padding: 10px;
-    justify-content: space-around;
-    li a {
-      font-size: 18px;
-    }
-    li.current_page_item a {
-      font-weight: bold;
-    }
-  }
 }
 
 .hero-title {
