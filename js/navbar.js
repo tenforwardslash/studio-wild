@@ -3,6 +3,15 @@
         if ($(this).scrollTop() > 10) {
             $('header.tastyheader').slideDown(500);
         }
+        $(document).ready(function() {
+            //toggle menu
+            $('#menu-btn').click(function(){
+                console.log("clicked");
+                $('.navicon').toggleClass('close');
+                $('header.sw-header').toggleClass('mobile-opened');
+                $('progress#progressBar').toggle();
+            })
+        });
 
         // fade in .navbar
         $(function () {
