@@ -25,6 +25,7 @@ function studiowild_enqueue_styles() {
 
 function studiowild_enqueue_scripts() {
     wp_enqueue_script('my-custom-script', get_stylesheet_directory_uri() .'/js/navbar.js', array('jquery'), null, true);
+	wp_enqueue_script('transitions', get_stylesheet_directory_uri() .'/js/transitions.js', array('jquery'), null, true);
 }
 
 add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_styles' );

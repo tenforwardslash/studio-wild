@@ -10,6 +10,12 @@ nav.site-navigation {
   justify-content: space-around;
   background-color: #6A8281;
 }
+
+// add css class to main header image classes to fix the background until...certain point. Need to build that part
+.fixed-bg div.text-wrapper div.main-text {
+  position: fixed;
+}
+
 header {
   height: $navbar-height;
   z-index: 1001;
