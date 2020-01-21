@@ -8,7 +8,8 @@
             $('#menu-btn').click(function(){
                 console.log("clicked");
                 $('.navicon').toggleClass('close');
-                $('.menu').toggleClass('mobile-opened')
+                $('header.sw-header').toggleClass('mobile-opened');
+                $('progress#progressBar').toggle();
             })
         });
 
