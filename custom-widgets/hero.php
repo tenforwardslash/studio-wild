@@ -47,6 +47,15 @@ class Hero extends Widget_Base {
             ]
         );
 
+	    $this->add_control(
+		    'title_css_class',
+		    [
+			    'label' => __( 'Title CSS Class', 'elementor' ),
+			    'type' => Controls_Manager::TEXT,
+			    'description' => __( 'An optional CSS class to apply to the title text', 'elementor' ),
+		    ]
+	    );
+
         // todo: add to all widgets
 //        $this->add_control(
 //            'disable_typography_defaults',
@@ -177,7 +186,7 @@ class Hero extends Widget_Base {
             <!-- <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='' style='object-fit: cover;'/>
             </div> -->
-            <div class='hero-title'>
+            <div class='hero-title $settings[title_css_class]'>
                 <h1 class='sk-text-dark'>$settings[title]</h1>
             </div>
         </div>";

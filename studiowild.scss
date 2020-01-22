@@ -1,3 +1,5 @@
+@use 'animations';
+
 $elementor-mobile-breakpoint: 767px;
 $navbar-height: 63px;
 
@@ -5,6 +7,11 @@ $navbar-height: 63px;
 $sw-black: #2D2722;
 $sw-grey: #EBECE7;
 $sw-gold: #DDAE3C;
+
+// add css class to main header image classes to fix the background until certain point
+.fixed-bg div.text-wrapper div.main-text {
+  position: fixed;
+}
 
 //nav.site-navigation {
 //  justify-content: space-around;

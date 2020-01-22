@@ -275,8 +275,10 @@ class Logo_Hero_CTA extends Widget_Base {
                 <img src='<?= $logo_url?>'/>
             </div>
             <div class='text-wrapper'>
-                <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
-                <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
+            	<div class='main-text'>
+                    <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
+                    <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
+                </div>
                 <div class='overlay'>
                     <img class='img-overlay' src='<?= $overlay_url ?>'/>
                 </div>
