@@ -327,7 +327,7 @@ class Portfolio_Overview extends Widget_Base {
         $parent_id_name_map = [];
         foreach ($parents as $p_cat) {
             $parent_cat_options[$p_cat->slug] = __( $p_cat->name );
-            $parent_id_name_map[$p_cat->ID] = __( $p_cat->name );
+            $parent_id_name_map[$p_cat->term_id] = __( $p_cat->name );
         }
         $children = array_filter($post_categories, function($cat){return $cat->parent !== 0;});
 //        $parent_sub_cat_map = build_categories_map($post_categories);
