@@ -9,13 +9,13 @@
 namespace Elementor;
 
 
-class Logo_Hero_CTA extends Widget_Base {
+class Hero_Title_Blurb extends Widget_Base {
     public function get_name() {
-        return 'logo-hero-cta';
+        return 'hero-title-blurb';
     }
 
     public function get_title() {
-        return 'Hero Image with Logo and Centered CTA';
+        return 'Hero Image with Centered Title & Blurb';
     }
 
     public function get_icon() {
@@ -28,7 +28,7 @@ class Logo_Hero_CTA extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'logo_hero_cta',
+            'hero_title_blurb',
             [
                 'label' => __( 'Content', 'elementor' ),
             ]
@@ -46,13 +46,31 @@ class Logo_Hero_CTA extends Widget_Base {
                 'default' => __( 'Add Your Heading Text Here', 'elementor' ),
             ]
         );
+        $this->add_control(
+            'title_size',
+            [
+                'label' => __( 'HTML Tag' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'h1' => 'H1',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'h4' => 'H4',
+                    'h5' => 'H5',
+                    'h6' => 'H6',
+                    'div' => 'div',
+                    'span' => 'span',
+                    'p' => 'p',
+                ],
+                'default' => 'h1',
+            ]
+        );
 
 	    $this->add_control(
 		    'header_color',
 		    [
-			    'label' => __( 'Main Header Color', 'elementor' ),
+			    'label' => __( 'Title Color', 'elementor' ),
 			    'type' => Controls_Manager::COLOR,
-//			    'default' => '#ffffff',
 			    'selectors' => [
 				    "{{WRAPPER}} .title" => 'color: {{UNIT}};'
 			    ],
@@ -60,226 +78,119 @@ class Logo_Hero_CTA extends Widget_Base {
 	    );
 
         $this->add_responsive_control(
-            'title-padding',
+            'title_blurb_spacing',
             [
-                'label' => __( 'Title Padding', 'plugin-name' ),
+                'label' => __( 'Spacing between title and blurb', 'elementor' ),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
-                    '%' => [
+                    'px' => [
                         'min' => 0,
-                        'max' => 50,
+                        'max' => 150,
                     ],
                 ],
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'desktop_default' => [
-                    'size' => 30,
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'size' => 15,
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'size' => 10,
-                    'unit' => '%',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .title' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'logo',
-            [
-                'label' => __( 'Logo', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::MEDIA,
-                'placeholder' => __( 'Logo to go in top left corner', 'elementor' ),
-            ]
-        );
-
-	    $this->add_responsive_control(
-		    'logo_position',
-		    [
-			    'label' => __( 'Logo Left Position', 'elementor' ),
-			    'type' => Controls_Manager::SLIDER,
-			    'range' => [
-				    'px' => [
-					    'min' => 0,
-					    'max' => 500,
-				    ],
-			    ],
-			    'devices' => [ 'desktop', 'tablet', 'mobile' ],
-			    'desktop_default' => [
-				    'size' => 40,
-				    'unit' => 'px',
-			    ],
-			    'tablet_default' => [
-				    'size' => 40,
-				    'unit' => 'px',
-			    ],
-			    'mobile_default' => [
-				    'size' => 10,
-				    'unit' => 'px',
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .logo-image' => 'left: {{SIZE}}{{UNIT}};',
-			    ],
-		    ]
-	    );
-
-        $this->add_responsive_control(
-            'logo_size',
-            [
-                'label' => __( 'Logo Width', 'elementor' ),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 50,
-                        'max' => 400,
-                    ],
-                ],
-                'devices' => [ 'desktop', 'tablet', 'mobile' ],
-                'desktop_default' => [
-                    'size' => 150,
+                    'size' => 45,
                     'unit' => 'px',
                 ],
                 'tablet_default' => [
-                    'size' => 100,
+                    'size' => 35,
                     'unit' => 'px',
                 ],
                 'mobile_default' => [
-                    'size' => 50,
+                    'size' => 25,
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .logo-image' => 'max-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .title' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                 ],
-            ]
-        );
-        $this->add_control(
-            'image-overlay-bottom',
-            [
-                'label' => __( 'Bottom Image Overlay', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::MEDIA,
-                'placeholder' => __( 'Bottom overlay for background image', 'elementor' ),
             ]
         );
         $this->add_responsive_control(
-            'image_overlay_height',
+            'title_blurb_margin',
             [
-                'label' => __( 'Bottom Image Overlay Height', 'elementor' ),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 50,
-                        'max' => 250,
-                    ],
-                ],
+                'label' => __( 'Title and Blurb Container Padding', 'elementor' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ '%', 'px', 'em' ],
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'desktop_default' => [
-                    'size' => 120,
-                    'unit' => 'px',
+                    'top' => '0',
+                    'right' => '15',
+                    'bottom' => '0',
+                    'left' => '15',
+                    'isLinked' => false,
                 ],
                 'tablet_default' => [
-                    'size' => 100,
-                    'unit' => 'px',
+                    'top' => '0',
+                    'right' => '10',
+                    'bottom' => '0',
+                    'left' => '10',
+                    'isLinked' => false,
                 ],
                 'mobile_default' => [
-                    'size' => 100,
-                    'unit' => 'px',
+                    'top' => '0',
+                    'right' => '5',
+                    'bottom' => '0',
+                    'left' => '5',
+                    'isLinked' => false,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .img-overlay' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .text-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
-        $this->add_control(
-            'button_link',
+        $this->add_responsive_control(
+            'align',
             [
-                'label' => __( 'Button Link', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::URL,
-                'placeholder' => __( 'CTA Link', 'elementor' ),
+                'label' => __( 'Alignment', 'elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left'    => [
+                        'title' => __( 'Left', 'elementor' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => __( 'Center', 'elementor' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => __( 'Right', 'elementor' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                    'justify' => [
+                        'title' => __( 'Justified', 'elementor' ),
+                        'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'prefix_class' => 'elementor%s-align-',
+                'default' => '',
             ]
         );
         $this->add_control(
-            'button_text',
+            'blurb',
             [
-                'label' => __( 'Button Text', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::TEXT,
-                'placeholder' => __( 'Button Text', 'elementor' ),
+                'label' => __( 'Blurb', 'elementor' ),
+                'type' => Controls_Manager::WYSIWYG,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'placeholder' => __( 'Enter blurb', 'elementor' ),
+                'default' => __( 'Add Catchy Blurb Here', 'elementor' ),
             ]
         );
-
-	    $this->add_responsive_control(
-		    'button_margin',
-		    [
-			    'label' => __( 'Button Margin', 'elementor' ),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => [ 'px', '%', 'em' ],
-			    'devices' => [ 'desktop', 'tablet', 'mobile' ],
-			    'desktop_default' => [
-				    'top' => '40',
-				    'right' => '40',
-				    'bottom' => '40',
-				    'left' => '40',
-				    'isLinked' => true,
-			    ],
-			    'tablet_default' => [
-				    'top' => '20',
-				    'right' => '20',
-				    'bottom' => '20',
-				    'left' => '20',
-				    'isLinked' => true,
-			    ],
-			    'mobile_default' => [
-				    'top' => '10',
-				    'right' => '10',
-				    'bottom' => '10',
-				    'left' => '10',
-				    'isLinked' => true,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .sw-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-		    ]
-	    );
 
         $this->end_controls_section();
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        $logo_url = $settings['logo']['url'];
-        $logo_size = $settings['logo_size']['size'] . $settings['logo_size']['unit'];
-//        $background_url = $settings['background']['url'];
-        if ( ! empty( $settings['button_link']['url'] ) ) {
-            $this->add_render_attribute( 'sw-button', 'href', $settings['button_link']['url'] );
-
-            if ( $settings['button_link']['is_external'] ) {
-                $this->add_render_attribute( 'sw-button', 'target', '_blank' );
-            }
-
-            if ( $settings['button_link']['nofollow'] ) {
-                $this->add_render_attribute( 'sw-button', 'rel', 'nofollow' );
-            }
-        }
-        $overlay_url = $settings['image-overlay-bottom']['url'];
+        $title_tag = $settings['title_size'];
+        $blurb_body = $settings['blurb'];
         ?>
-        <div class='full-window-height logo-hero-cta-wrap' style='position: relative;'>
-            <div class='logo-image'>
-                <img src='<?= $logo_url?>'/>
-            </div>
-            <div class='text-wrapper'>
-                <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
-                <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
-                <div class='overlay'>
-                    <img class='img-overlay' src='<?= $overlay_url ?>'/>
-                </div>
+        <div class='full-window-height-with-navbar' style="display:flex;align-items: center;justify-content: center;">
+            <div class='text-wrapper' style="align-items: center;justify-content: center;">
+                <<?= $title_tag ?> class='title sk-text-dark'><?=$settings['title']?></<?= $title_tag ?>>
+                <div><?= $blurb_body ?></div>
             </div>
         </div>
         <?php
