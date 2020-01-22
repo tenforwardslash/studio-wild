@@ -4,7 +4,8 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
+//This is actually any type of post, not just portfolio category... but first pass at changing all portfolio's to posts broke
+// it, and i don't think its worth the time. Just changed the user facing labels to be "posts"
 class Portfolio_Overview extends Widget_Base {
 
 	public function get_name() {
@@ -12,7 +13,7 @@ class Portfolio_Overview extends Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Portfolio Overview' );
+		return __( 'Posts Overview' );
 	}
 
 	public function get_icon() {
@@ -31,14 +32,14 @@ class Portfolio_Overview extends Widget_Base {
 		$this->start_controls_section(
 			'section_portfolio_overview',
 			[
-				'label' => __( 'Portfolio Overview' ),
+				'label' => __( 'Posts Overview' ),
 			]
 		);
 
 		$this->add_control(
 			'portfolio_labels_display',
 			[
-				'label' => __( 'Portfolio Labels Display' ),
+				'label' => __( 'Posts Labels Display' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
 					'flex-start' => 'Flex Start',
@@ -56,7 +57,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_items_per_row',
 			[
-				'label' => __( 'Portfolio Items Per Row' ),
+				'label' => __( 'Posts Items Per Row' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -74,7 +75,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_items_padding',
 			[
-				'label' => __( 'Portfolio Items Padding' ),
+				'label' => __( 'Posts Items Padding' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -87,7 +88,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_items_per_page',
 			[
-				'label' => __( 'Portfolio Items Per Page' ),
+				'label' => __( 'Posts Items Per Page' ),
 				'type' => Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 50,
@@ -102,7 +103,7 @@ class Portfolio_Overview extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'portfolio_link_typography',
-				'label' => __( 'Portfolio Link Typography' ),
+				'label' => __( 'Posts Link Typography' ),
 				'selector' => '{{WRAPPER}} .portfolio-link',
 			]
 		);
@@ -110,7 +111,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_color',
 			[
-				'label' => __( 'Portfolio Link Color' ),
+				'label' => __( 'Posts Link Color' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -125,7 +126,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_color_opacity',
 			[
-				'label' => __( 'Portfolio Link Color Opacity' ),
+				'label' => __( 'Posts Link Color Opacity' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -146,7 +147,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_hover_color',
 			[
-				'label' => __( 'Portfolio Link Hover Color' ),
+				'label' => __( 'Posts Link Hover Color' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -161,7 +162,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_hover_color_opacity',
 			[
-				'label' => __( 'Portfolio Link Hover Color Opacity' ),
+				'label' => __( 'Posts Link Hover Color Opacity' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -182,7 +183,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_active_color',
 			[
-				'label' => __( 'Portfolio Link Active Color' ),
+				'label' => __( 'Posts Link Active Color' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -197,7 +198,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_link_active_color_opacity',
 			[
-				'label' => __( 'Portfolio Link Active Color Opacity' ),
+				'label' => __( 'Posts Link Active Color Opacity' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -263,7 +264,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->start_controls_section(
 			'section_portfolio_headers_config',
 			[
-				'label' => __( 'Portfolio Headers Configuration' ),
+				'label' => __( 'Posts Headers Configuration' ),
 			]
 		);
 
@@ -302,7 +303,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_header_padding',
 			[
-				'label' => __( 'Portfolio Header Padding' ),
+				'label' => __( 'Posts Header Padding' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -316,36 +317,50 @@ class Portfolio_Overview extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'portfolio_header_typography',
-				'label' => __( 'Portfolio Header Typography' ),
+				'label' => __( 'Posts Header Typography' ),
 				'selector' => '{{WRAPPER}} .portfolio-header-text',
 			]
 		);
-
-		//todo: filter this to only return portfolio categories
-		$portfolio_categories = get_categories();
-//		error_log(print_r($portfolio_categories, true));
-
-		$category_options = [];
-		foreach ($portfolio_categories as $p_cat) {
-			$category_options[$p_cat->slug] = __( $p_cat->name );
-		}
+		$post_categories = get_categories();
+        $parents = array_filter($post_categories, function($cat){return $cat->parent == 0;});
+        $parent_cat_options = [];
+        $parent_id_name_map = [];
+        foreach ($parents as $p_cat) {
+            $parent_cat_options[$p_cat->slug] = __( $p_cat->name );
+            $parent_id_name_map[$p_cat->ID] = __( $p_cat->name );
+        }
+        $children = array_filter($post_categories, function($cat){return $cat->parent !== 0;});
+//        $parent_sub_cat_map = build_categories_map($post_categories);
+        $child_cat_options = [];
+        foreach ($children as $p_cat) {
+            $child_cat_options[$p_cat->slug] = __( $p_cat->name . ' - ' . $parent_id_name_map[$p_cat->parent]);
+        }
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_portfolio_filters_config',
 			[
-				'label' => __( 'Portfolio Filters Configuration' ),
+				'label' => __( 'Posts Filters Configuration' ),
 			]
 		);
+
+        $this->add_control(
+                'post_category',
+                [
+                    'label' => ( 'Visible Cat'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => $parent_cat_options
+                ]
+        );
 
 		$this->add_control(
 			'portfolio_filters',
 			[
-				'label' => __( 'Visible Portfolio Filters' ),
+				'label' => __( 'Visible Posts Filters' ),
 				'type' => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options' => $category_options,
+				'options' => $child_cat_options,
 				'label_block' => true,
 			]
 		);
@@ -353,7 +368,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_filters_margin',
 			[
-				'label' => __( 'Portfolio Filters Margin' ),
+				'label' => __( 'Posts Filters Margin' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -368,14 +383,14 @@ class Portfolio_Overview extends Widget_Base {
 		$this->start_controls_section(
 			'section_portfolio_item_config',
 			[
-				'label' => __( 'Portfolio Item Configuration' ),
+				'label' => __( 'Posts Item Configuration' ),
 			]
 		);
 
 		$this->add_control(
 			'portfolio_items_typography_color',
 			[
-				'label' => __( 'Portfolio Items Typography Color' ),
+				'label' => __( 'Posts Items Typography Color' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -391,7 +406,7 @@ class Portfolio_Overview extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'portfolio_item_header_typography',
-				'label' => __( 'Portfolio Item Header Typography' ),
+				'label' => __( 'Posts Item Header Typography' ),
 				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item h3',
 			]
 		);
@@ -399,7 +414,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_item_header_margin',
 			[
-				'label' => __( 'Portfolio Item Header Margin' ),
+				'label' => __( 'Posts Item Header Margin' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -413,7 +428,7 @@ class Portfolio_Overview extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'portfolio_item_subheader_typography',
-				'label' => __( 'Portfolio Item Subheader Typography' ),
+				'label' => __( 'Posts Item Subheader Typography' ),
 				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_item_subheader',
 			]
 		);
@@ -421,7 +436,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_item_subheader_margin',
 			[
-				'label' => __( 'Portfolio Item Subheader Margin' ),
+				'label' => __( 'Posts Item Subheader Margin' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -435,7 +450,7 @@ class Portfolio_Overview extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'portfolio_item_excerpt_typography',
-				'label' => __( 'Portfolio Item Excerpt Typography' ),
+				'label' => __( 'Posts Item Excerpt Typography' ),
 				'selector' => '{{WRAPPER}} .portfolio-items .portfolio-item .portfolio_excerpt',
 			]
 		);
@@ -443,7 +458,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_item_excerpt_margin',
 			[
-				'label' => __( 'Portfolio Item Excerpt Margin' ),
+				'label' => __( 'Posts Item Excerpt Margin' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
@@ -456,7 +471,7 @@ class Portfolio_Overview extends Widget_Base {
 		$this->add_control(
 			'portfolio_items_overlay',
 			[
-				'label' => __( 'Portfolio Items Overlay' ),
+				'label' => __( 'Posts Items Overlay' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => 'linear-gradient(to bottom, rgba(255,0,0,0), rgba(221,174,60,.7))',
@@ -485,7 +500,8 @@ class Portfolio_Overview extends Widget_Base {
 		$visible_filters[] = '<a class="portfolio-link active" href="#all">All</a>';
 
 		$posts = get_posts(array(
-			'numberposts'   =>  -1
+			'numberposts'   =>  -1,
+            'category_name' => $settings['post_category']
 		));
 
 		$portfolio_items = [];
@@ -632,4 +648,18 @@ class Portfolio_Overview extends Widget_Base {
 		<?php
 	}
 
+}
+//builds a map of parent categories to their direct descendants
+function build_categories_map($children) {
+    $reduce_func = function($opts_map, $child) {
+        if (!array_key_exists($child->parent, $opts_map)) {
+            $opts_map[$child->parent] = [];
+        }
+        $opts_map[$child->parent][$child->slug] = __($child->name);
+        return $opts_map;
+    };
+    $cat_map = array_reduce($children, $reduce_func, []);
+//    error_log(print_r($cat_map, true));
+
+    return $cat_map;
 }

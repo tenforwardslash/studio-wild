@@ -8,7 +8,7 @@ $sw-black: #2D2722;
 $sw-grey: #EBECE7;
 $sw-gold: #DDAE3C;
 
-// add css class to main header image classes to fix the background until...certain point
+// add css class to main header image classes to fix the background until certain point
 .fixed-bg div.text-wrapper div.main-text {
   position: fixed;
 }
@@ -330,42 +330,6 @@ section.bg-grey {
   }
 }
 
-  //.portfolio-items .portfolio-item a:hover p.portfolio_item_header {
-//  text-decoration: underline;
-//}
-//
-//.portfolio-items .portfolio-item a div.portfolio-item-img {
-//  position: relative;
-//  justify-content: center;
-//  display: flex;
-//  flex-direction: row;
-//  overflow: hidden;
-//}
-//
-//.portfolio-items .portfolio-item a div.portfolio-item-img img {
-//  flex: 1;
-//}
-//
-//.portfolio-items .portfolio-item a div.portfolio-item-img div.portfolio-item-img-overlay {
-//  position: absolute;
-//  top: 0;
-//  left: 0;
-//  width: 100%;
-//  height: 100%;
-//  display: none;
-//}
-
-//.portfolio-items .portfolio-item a:hover div.portfolio-item-img div.portfolio-item-img-overlay {
-//  display: block;
-//}
-
-.full-height {
-  height: 100vh;
-}
-
-.full-height-with-navbar {
-  height: calc(100vh - #{$navbar-height});
-}
 
 .sw-button {
   -webkit-border-radius: 0;

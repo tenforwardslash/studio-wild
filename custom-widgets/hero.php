@@ -47,6 +47,15 @@ class Hero extends Widget_Base {
             ]
         );
 
+	    $this->add_control(
+		    'title_css_class',
+		    [
+			    'label' => __( 'Title CSS Class', 'elementor' ),
+			    'type' => Controls_Manager::TEXT,
+			    'description' => __( 'An optional CSS class to apply to the title text', 'elementor' ),
+		    ]
+	    );
+
         // todo: add to all widgets
 //        $this->add_control(
 //            'disable_typography_defaults',
@@ -173,11 +182,11 @@ class Hero extends Widget_Base {
         error_log(print_r($settings['button_link'], true), 0);
 //        $header_class = $settings['disable_typography_defaults'] == true ? 'hero-title-header' : 'sw-main-headline';
         // todo: should we be checking to see if the navbar is gonna roll down or not?
-        echo "<div class='full-height-with-navbar hero-wrap' style='position: relative;'>
+        echo "<div class='full-window-height-with-navbar hero-wrap' style='position: relative;'>
             <!-- <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
                 <img src='' style='object-fit: cover;'/>
             </div> -->
-            <div class='hero-title'>
+            <div class='hero-title $settings[title_css_class]'>
                 <h1 class='sk-text-dark'>$settings[title]</h1>
             </div>
         </div>";
