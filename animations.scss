@@ -1,0 +1,40 @@
+@mixin shift-animate($attr-count: 5) {
+  @for $i from 1 through $attr-count {
+
+    .shift-animate-#{$i} {
+      transform: translateX(10px);
+      animation: shift-in #{$i * .5}s ease forwards;
+    }
+
+    .slide-animate-#{$i} {
+      transform: translateY(50px);
+      animation: slide-in #{$i * .5}s ease forwards;
+    }
+
+  }
+}
+
+@include shift-animate;
+
+*[class*='slide-in'] {
+  opacity: 0;
+}
+
+*[class*='shift-in-'] {
+  opacity: 0;
+}
+
+
+@keyframes shift-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

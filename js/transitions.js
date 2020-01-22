@@ -1,77 +1,65 @@
 (function ($) {
-    $(document).ready(function(){
-        if ($(this).scrollTop() > 10) {
-            $('header.tastyheader').slideDown(500);
-        }
 
-        // fade in .navbar
+    $.fn.isInViewport = function() {
+        var rect = $(this)[0].getBoundingClientRect();
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+        );
+    };
+
+
+    $(document).ready(function(){
+
         $(function () {
+            const TOP_POS = 100;
+
+            $(window).on('resize scroll', function() {
+                $('*[class*="shift-in-"]').each(function(i, el) {
+                    var el = $(el);
+                    var className = this.className.match(/shift-in-\d+/);
+                    if (className && className.length > 0) {
+                        if (el.isInViewport()) {
+                            let animationSpeed = className[0].substring(className[0].lastIndexOf('-'));
+                            el.addClass('shift-animate' + animationSpeed);
+                        }
+                    }
+                });
+
+                //target all columns of slide-in parent
+                $('*[class*="slide-in"]').each(function(i, el) {
+                    var el = $(el);
+                    var className = this.className.match(/slide-in-\d+/);
+                    if (className && className.length > 0) {
+                        if (el.isInViewport()) {
+                            let animationSpeed = className[0].substring(className[0].lastIndexOf('-'));
+                            el.addClass('slide-animate' + animationSpeed);
+                        }
+                    }
+                });
+            });
+
             $(window).scroll(function () {
-                // set distance user needs to scroll before we start fadeIn
-                if ($(this).scrollTop() > 10) {
-                    $('header.tastyheader').slideDown(400);
+                var element = $('.fixed-bg div.text-wrapper div.main-text');
+                var topoff = element.offset().top;
+                var topPos = element.position().top;
+                // console.log('top pos', topoff);
+                // console.log('top pos', topPos);
+                if ($(window).scrollTop() > 100) {
+                    $('.fixed-bg div.text-wrapper div.main-text').css({
+                        position: 'relative',
+                        top: TOP_POS
+                    });
                 } else {
-                    //todo: see if she wants to hide when you scroll all the way up
-                    // $('header.tastyheader').slideUp(500)
+                    $('.fixed-bg div.text-wrapper div.main-text').css({
+                        position: 'fixed',
+                        top: 'auto'
+                    });
                 }
             });
         });
-
-        $(function() {
-            // https://css-tricks.com/reading-position-indicator/
-
-            var getMax = function(){
-                return $(document).height() - $(window).height();
-            }
-
-            var getValue = function(){
-                return $(window).scrollTop();
-            }
-
-            if ('max' in document.createElement('progress')) {
-                // Browser supports progress element
-                var progressBar = $('progress');
-
-                // Set the Max attr for the first time
-                progressBar.attr({ max: getMax() });
-
-                $(document).on('scroll', function(){
-                    // On scroll only Value attr needs to be calculated
-                    progressBar.attr({ value: getValue() });
-                });
-
-                $(window).resize(function(){
-                    // On resize, both Max/Value attr needs to be calculated
-                    progressBar.attr({ max: getMax(), value: getValue() });
-                });
-
-            } else {
-
-                //this is for unsupported browsers - TODO: should we even do this...
-                var progressBar = $('.progress-bar'),
-                    max = getMax(),
-                    value, width;
-
-                var getWidth = function() {
-                    // Calculate width in percentage
-                    value = getValue();
-                    width = (value/max) * 100;
-                    width = width + '%';
-                    return width;
-                }
-
-                var setWidth = function(){
-                    progressBar.css({ width: getWidth() });
-                }
-
-                $(document).on('scroll', setWidth);
-                $(window).on('resize', function(){
-                    // Need to reset the Max attr
-                    max = getMax();
-                    setWidth();
-                });
-            }
-        });
-
     });
 }(jQuery));

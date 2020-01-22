@@ -6,7 +6,6 @@
         $(document).ready(function() {
             //toggle menu
             $('#menu-btn').click(function(){
-                console.log("clicked");
                 $('.navicon').toggleClass('close');
                 $('header.sw-header').toggleClass('mobile-opened');
                 $('progress#progressBar').toggle();
@@ -18,10 +17,7 @@
             $(window).scroll(function () {
                 // set distance user needs to scroll before we start fadeIn
                 if ($(this).scrollTop() > 10) {
-                    $('header.tastyheader').slideDown(400);
-                } else {
-                    //todo: see if she wants to hide when you scroll all the way up
-                    // $('header.tastyheader').slideUp(500)
+                    $('header.tastyheader').slideDown(500);
                 }
             });
         });

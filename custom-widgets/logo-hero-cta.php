@@ -167,6 +167,35 @@ class Logo_Hero_CTA extends Widget_Base {
                 'placeholder' => __( 'Bottom overlay for background image', 'elementor' ),
             ]
         );
+        $this->add_responsive_control(
+            'image_overlay_height',
+            [
+                'label' => __( 'Bottom Image Overlay Height', 'elementor' ),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 50,
+                        'max' => 250,
+                    ],
+                ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
+                    'size' => 120,
+                    'unit' => 'px',
+                ],
+                'tablet_default' => [
+                    'size' => 100,
+                    'unit' => 'px',
+                ],
+                'mobile_default' => [
+                    'size' => 100,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .img-overlay' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
         $this->add_control(
             'button_link',
             [
@@ -250,7 +279,7 @@ class Logo_Hero_CTA extends Widget_Base {
                 	<a " . $this->get_render_attribute_string( 'sw-button' ) . "><button class='sw-button'>$settings[button_text]</button></a>
                 </div>
                 <div class='overlay'>
-                    <img src='$overlay_url'/>
+                    <img class='img-overlay' src='$overlay_url'/>
                 </div>
             </div>
         </div>";
