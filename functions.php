@@ -34,9 +34,11 @@ function studiowild_enqueue_styles() {
 function studiowild_enqueue_scripts() {
     $NAVBAR_PATH = '/js/navbar.js';
     $TRANSITIONS_PATH = '/js/transitions.js';
+    $PARALLAX_PATH = '/js/jquery-parallax.min.js';
 
     wp_enqueue_script('my-custom-script', get_stylesheet_directory_uri() . $NAVBAR_PATH, array('jquery'), versionize($NAVBAR_PATH), true);
 	wp_enqueue_script('transitions', get_stylesheet_directory_uri() . $TRANSITIONS_PATH, array('jquery'), versionize($TRANSITIONS_PATH), true);
+	wp_enqueue_script('parallax', get_stylesheet_directory_uri() . $PARALLAX_PATH, array('jquery'), versionize($PARALLAX_PATH), true);
 }
 
 add_action( 'wp_enqueue_scripts', 'studiowild_enqueue_styles' );

@@ -28,10 +28,40 @@
         });
     }
 
+    var testMobile;
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+    var parallax = function() {
+        testMobile = isMobile.any();
+        if (testMobile == null) {
+            console.log('jcalling parallax function');
+            $(".parallax").parallax("40%", 0.3);
+        }
+    };
+
     $(document).ready(function(){
 
         $(function () {
-            const TOP_POS = 100;
+            //todo: this is terrible - jquery parallax super laggy. HAVE to do css parallax
+            parallax();
 
             //animate if animated elements are visible in viewport
             checkAnimations('shift');
@@ -41,25 +71,6 @@
                 //animate if animated elements appear in viewport
                 checkAnimations('shift');
                 checkAnimations('slide');
-            });
-
-            $(window).scroll(function () {
-                var element = $('.fixed-bg div.text-wrapper div.main-text');
-                // var topoff = element.offset().top;
-                // var topPos = element.position().top;
-                // console.log('top pos', topoff);
-                // console.log('top pos', topPos);
-                if ($(window).scrollTop() > 100 && element && element.length > 0) {
-                    $('.fixed-bg div.text-wrapper div.main-text').css({
-                        position: 'relative',
-                        top: TOP_POS
-                    });
-                } else {
-                    $('.fixed-bg div.text-wrapper div.main-text').css({
-                        position: 'fixed',
-                        top: 'auto'
-                    });
-                }
             });
         });
     });

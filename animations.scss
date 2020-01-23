@@ -16,6 +16,10 @@
 
 @include shift-animate;
 
+.parallax {
+  transition: none !important;
+}
+
 *[class*='slide-in'] {
   opacity: 0;
 }
@@ -23,7 +27,6 @@
 *[class*='shift-in-'] {
   opacity: 0;
 }
-
 
 @keyframes shift-in {
   to {
