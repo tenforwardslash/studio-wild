@@ -89,6 +89,15 @@ class Logo_Hero_CTA extends Widget_Base {
             ]
         );
 
+	    $this->add_control(
+		    'title_css_class',
+		    [
+			    'label' => __( 'Title CSS Class', 'elementor' ),
+			    'type' => Controls_Manager::TEXT,
+			    'description' => __( 'An optional CSS class to apply to the main text section (includes button)', 'elementor' ),
+		    ]
+	    );
+
         $this->add_control(
             'logo',
             [
@@ -275,7 +284,7 @@ class Logo_Hero_CTA extends Widget_Base {
                 <img src='<?= $logo_url?>'/>
             </div>
             <div class='text-wrapper'>
-            	<div class='main-text'>
+            	<div class='main-text <?=$settings['title_css_class']?>'>
                     <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
                     <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
                 </div>
