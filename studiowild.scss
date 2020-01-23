@@ -287,7 +287,7 @@ ul.menu li a {
 
 }
 
-form#form_contact-studio-wild .frm_form_fields {
+form#form_contact-studio-wild .frm_form_fields, form#form_contact-studio-wild2 .frm_form_fields {
   fieldset { border: 0 };
   .frm_form_field.form-field {
     margin-bottom: 1rem;
@@ -312,6 +312,10 @@ form#form_contact-studio-wild .frm_form_fields {
       margin: auto;
     }
   }
+}
+
+form#form_contact-studio-wild2 .frm_form_fields .frm_submit button {
+  margin: unset;
 }
 
 section.bg-grey {
