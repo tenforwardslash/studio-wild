@@ -14,7 +14,7 @@
 
 
     function checkAnimations(animationType) {
-        var animationName = animationType + "-in-";
+        var animationName = "sw-" + animationType + "-";
 
         $('*[class*="' + animationName + '"]').each(function(i, el) {
             var el = $(el);
@@ -22,16 +22,17 @@
             if (className && className.length > 0) {
                 if (el.isInViewport()) {
                     let animationSpeed = className[0].substring(className[0].lastIndexOf('-'));
-                    el.addClass(animationType + '-animate' + animationSpeed);
+                    el.addClass(animationName + 'animate' + animationSpeed);
                 }
             }
         });
     }
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         // initialize the parallax lib
         var rellax = new Rellax('.parallax', {
             center: true,
+            speed: -3
         });
 
         $(function () {
