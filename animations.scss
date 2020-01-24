@@ -16,10 +16,7 @@
 
 @include shift-animate;
 
-.parallax {
-  transition: none !important;
-}
-
+//TODO: rename this and fix javascript
 *[class*='slide-in'] {
   opacity: 0;
 }

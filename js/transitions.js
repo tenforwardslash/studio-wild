@@ -28,41 +28,13 @@
         });
     }
 
-    var testMobile;
-    var isMobile = {
-        Android: function() {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function() {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function() {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function() {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function() {
-            return navigator.userAgent.match(/IEMobile/i);
-        },
-        any: function() {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-    };
-    var parallax = function() {
-        testMobile = isMobile.any();
-        if (testMobile == null) {
-            console.log('jcalling parallax function');
-            $(".parallax").parallax("40%", 0.3);
-        }
-    };
-
     $(document).ready(function(){
+        // initialize the parallax lib
+        var rellax = new Rellax('.parallax', {
+            center: true,
+        });
 
         $(function () {
-            //todo: this is terrible - jquery parallax super laggy. HAVE to do css parallax
-            parallax();
-
             //animate if animated elements are visible in viewport
             checkAnimations('shift');
             checkAnimations('slide');
