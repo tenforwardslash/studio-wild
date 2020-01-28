@@ -61,7 +61,7 @@ header {
           max-height: none;
         }
         li a {
-          font-size: 18px;
+          font-size: 16px;
           &:hover {
             text-decoration: underline;
           }
@@ -305,7 +305,6 @@ form#form_contact-studio-wild .frm_form_fields, form#form_contact-studio-wild2 .
       }
     }
   }
-
   .frm_submit {
     display: flex;
     button {
@@ -352,12 +351,6 @@ section.bg-grey {
   }
 }
 
-/*typography styles*/
-
-.sw-description-paragraph {
-  font-family: "proxima-nova", sans-serif !important;
-  font-size: 21px !important; // original: 24pt
-}
 
 //.sw-cta {
 //  font-family: "proxima-nova", sans-serif !important;

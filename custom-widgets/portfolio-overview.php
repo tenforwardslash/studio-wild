@@ -79,6 +79,13 @@ class Portfolio_Overview extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+				    'unit' => 'px',
+                    'right' => '20',
+                    'left' => '20',
+                    'bottom' => '20',
+                    'top' => '20',
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-items .portfolio-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -240,6 +247,13 @@ class Portfolio_Overview extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'right' => '5',
+                    'left' => '5',
+                    'bottom' => '0',
+                    'top' => '0',
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -253,6 +267,13 @@ class Portfolio_Overview extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'right' => '0',
+                    'left' => '0',
+                    'bottom' => '0',
+                    'top' => '40',
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-pagination' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -372,6 +393,13 @@ class Portfolio_Overview extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'label_block' => true,
 				'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'right' => '20',
+                    'left' => '0',
+                    'bottom' => '0',
+                    'top' => '0',
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-header .portfolio-filters a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
