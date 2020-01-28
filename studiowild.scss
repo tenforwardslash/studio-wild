@@ -8,9 +8,7 @@ $sw-black: #2D2722;
 $sw-grey: #EBECE7;
 $sw-gold: #DDAE3C;
 
-//nav.site-navigation {
-//  justify-content: space-around;
-//}
+
 header {
   height: $navbar-height;
   background-color: #6A8281;
@@ -152,30 +150,7 @@ header {
     }
   }
 }
-//
-//
-//ul.menu li a:hover {
-//  text-decoration: underline;
-//}
-//
-//nav.site-navigation {
-//  div.menu-main-menu-container {
-//    width: 80%;
-//    -webkit-font-smoothing: antialiased;
-//    -moz-osx-font-smoothing: auto;
-//    margin: auto;
-//  }
-//  ul.menu {
-//    padding: 10px;
-//    justify-content: space-around;
-//    li a {
-//      font-size: 18px;
-//    }
-//    li.current_page_item a {
-//      font-weight: bold;
-//    }
-//  }
-//}
+
 
 
 header.tastyheader {
@@ -350,12 +325,3 @@ section.bg-grey {
     color: $sw-grey;
   }
 }
-
-
-//.sw-cta {
-//  font-family: "proxima-nova", sans-serif !important;
-//  font-size: 16px !important; // original: 18pt
-//  text-transform: uppercase !important;
-//  letter-spacing: 2.4px !important; // original: 100pt
-//  font-weight: 700 !important; /* todo: this is because adobe fonts project only has the weights of 400 and 700*/
-//}
