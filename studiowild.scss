@@ -202,9 +202,12 @@ footer.site-footer {
   }
 
   div.menu-footer-container {
-    margin:0 auto 15px;
+    margin:0 auto 35px;
     @media (max-width:$elementor-mobile-breakpoint) {
       margin:0 auto 85px;
+    }
+    .menu-item a:hover {
+      text-decoration: underline;
     }
   }
 
@@ -242,6 +245,7 @@ ul.menu li a {
         justify-content: center;
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
         overflow: hidden;
         img {
           flex: 1;

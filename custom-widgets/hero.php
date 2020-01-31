@@ -115,46 +115,7 @@ class Hero extends Widget_Base {
                 ],
             ]
         );
-//        todo: not sure if we need a logo
-//        $this->add_control(
-//            'logo',
-//            [
-//                'label' => __( 'Logo', 'elementor' ),
-//                'label_block' => true,
-//                'type' => Controls_Manager::MEDIA,
-//                'placeholder' => __( 'Logo to go in top left corner', 'elementor' ),
-//            ]
-//        );
 
-//        $this->add_responsive_control(
-//            'logo_size',
-//            [
-//                'label' => __( 'Logo Width', 'elementor' ),
-//                'type' => Controls_Manager::SLIDER,
-//                'range' => [
-//                    'px' => [
-//                        'min' => 50,
-//                        'max' => 400,
-//                    ],
-//                ],
-//                'devices' => [ 'desktop', 'tablet', 'mobile' ],
-//                'desktop_default' => [
-//                    'size' => 150,
-//                    'unit' => 'px',
-//                ],
-//                'tablet_default' => [
-//                    'size' => 100,
-//                    'unit' => 'px',
-//                ],
-//                'mobile_default' => [
-//                    'size' => 50,
-//                    'unit' => 'px',
-//                ],
-//                'selectors' => [
-//                    '{{WRAPPER}} .logo-image' => 'max-width: {{SIZE}}{{UNIT}};',
-//                ],
-//            ]
-//        );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -164,15 +125,7 @@ class Hero extends Widget_Base {
                 'selector' => '{{WRAPPER}} .hero-wrap',
             ]
         );
-        $this->add_control(
-            'image-overlay-bottom',
-            [
-                'label' => __( 'Bottom Image Overlay', 'elementor' ),
-                'label_block' => true,
-                'type' => Controls_Manager::MEDIA,
-                'placeholder' => __( 'Bottom overlay for background image', 'elementor' ),
-            ]
-        );
+
         $this->end_controls_section();
     }
 
@@ -183,9 +136,6 @@ class Hero extends Widget_Base {
 //        $header_class = $settings['disable_typography_defaults'] == true ? 'hero-title-header' : 'sw-main-headline';
         // todo: should we be checking to see if the navbar is gonna roll down or not?
         echo "<div class='full-window-height-with-navbar hero-wrap' style='position: relative;'>
-            <!-- <div class='logo-image' style='position: absolute; top: 0; left: 0;'>
-                <img src='' style='object-fit: cover;'/>
-            </div> -->
             <div class='hero-title $settings[title_css_class]'>
                 <h1 class='sk-text-dark'>$settings[title]</h1>
             </div>

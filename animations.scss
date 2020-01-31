@@ -1,3 +1,5 @@
+$elementor-mobile-breakpoint: 767px;
+
 @mixin shift-animate($attr-count: 5) {
   @for $i from 1 through $attr-count {
 
@@ -10,13 +12,22 @@
       transform: translateY(50px);
       animation: slide-in #{$i * .5}s ease forwards;
     }
-
+    @media (max-width:$elementor-mobile-breakpoint) {
+      .sw-mobile-shift-animate {
+        transform: translateX(10px);
+        animation: shift-in #{$i * .5}s ease forwards;
+      }
+      .sw-mobile-slide-animate-#{$i} {
+        transform: translateY(50px);
+        animation: slide-in #{$i * .5}s ease forwards;
+      }
+    }
   }
 }
 
+
 @include shift-animate;
 
-//TODO: rename this and update javascript
 *[class*='sw-slide-'] {
   opacity: 0;
 }

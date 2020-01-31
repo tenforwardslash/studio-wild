@@ -167,6 +167,16 @@ class Logo_Hero_CTA extends Widget_Base {
                 ],
             ]
         );
+//        $this->add_group_control(
+//            Group_Control_Background::get_type(),
+//            [
+//                'name' => 'background',
+//                'label' => __( 'Background', 'elementor' ),
+//                'types' => [ 'classic', 'gradient', 'video' ],
+//                'selector' => '{{WRAPPER}} .logo-hero-cta-wrap',
+//            ]
+//        );
+
         $this->add_control(
             'image-overlay-bottom',
             [
@@ -279,17 +289,19 @@ class Logo_Hero_CTA extends Widget_Base {
         }
         $overlay_url = $settings['image-overlay-bottom']['url'];
         ?>
-        <div class='full-window-height logo-hero-cta-wrap' style='position: relative;'>
-            <div class='logo-image'>
-                <img src='<?= $logo_url?>'/>
-            </div>
-            <div class='text-wrapper'>
-            	<div class='main-text <?=$settings['title_css_class']?>'>
-                    <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
-                    <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
+        <div class="logo-hero-cta-wrap full-window-height">
+            <div style='position: relative;width:100%; height:100%;'>
+                <div class='logo-image'>
+                    <img src='<?= $logo_url?>'/>
                 </div>
-                <div class='overlay'>
-                    <img class='img-overlay' src='<?= $overlay_url ?>'/>
+                <div class='text-wrapper'>
+                    <div class='main-text <?=$settings['title_css_class']?>'>
+                        <h1 class='title sk-text-dark'><?=$settings['title']?></h1>
+                        <a <?= $this->get_render_attribute_string( 'sw-button' )?>><button class='sw-button'><?= $settings['button_text']?> </button></a>
+                    </div>
+                    <div class='overlay'>
+                        <img class='img-overlay' src='<?= $overlay_url ?>'/>
+                    </div>
                 </div>
             </div>
         </div>
