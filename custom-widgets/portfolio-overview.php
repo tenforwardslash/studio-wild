@@ -72,25 +72,40 @@ class Portfolio_Overview extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'portfolio_items_padding',
-			[
-				'label' => __( 'Posts Items Padding' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'label_block' => true,
-				'size_units' => [ 'px', '%', 'em' ],
-				'default' => [
-				    'unit' => 'px',
-                    'right' => '20',
-                    'left' => '20',
-                    'bottom' => '20',
+        $this->add_responsive_control(
+            'portfolio_items_padding',
+            [
+                'label' => __( 'Posts Items Padding' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'desktop_default' => [
                     'top' => '20',
+                    'right' => '20',
+                    'bottom' => '20',
+                    'left' => '20',
+                    'isLinked' => true,
                 ],
-				'selectors' => [
-					'{{WRAPPER}} .portfolio-items .portfolio-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
+                'tablet_default' => [
+                    'top' => '20',
+                    'right' => '20',
+                    'bottom' => '20',
+                    'left' => '20',
+                    'isLinked' => true,
+                ],
+                'mobile_default' => [
+                    'top' => '0',
+                    'right' => '0',
+                    'bottom' => '0',
+                    'left' => '0',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .portfolio-items .portfolio-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
 
 		$this->add_control(
 			'portfolio_items_per_page',
@@ -365,7 +380,37 @@ class Portfolio_Overview extends Widget_Base {
 				'label' => __( 'Posts Filters Configuration' ),
 			]
 		);
-
+        $this->add_control(
+            'limit_posts',
+            [
+                'label' => __( 'Limit Posts?' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes' ),
+                'label_off' => __( 'No' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+        $this->add_control(
+                'post_count',
+                [
+                    'condition' => ['limit_posts' => 'yes'],
+                    'label' => __( 'Number of Posts to Limit' ),
+                    'type' => Controls_Manager::NUMBER,
+                    'default' => -1,
+                ]
+        );
+        $this->add_control(
+            'hide_filters',
+            [
+                'label' => __( 'Hide Filters?' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes' ),
+                'label_off' => __( 'No' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
         $this->add_control(
                 'post_category',
                 [
@@ -528,7 +573,8 @@ class Portfolio_Overview extends Widget_Base {
 		$visible_filters[] = '<a class="portfolio-link active" href="#all">All</a>';
 
 		$posts = get_posts(array(
-			'numberposts'   =>  -1,
+		        // todo
+			'numberposts'   =>  $settings['post_count'],
             'category_name' => $settings['post_category']
 		));
 
@@ -567,10 +613,13 @@ class Portfolio_Overview extends Widget_Base {
 		$pagination_align = $settings['pagination_alignment'];
 
 		echo "<div class='portfolio-header' style='display:flex; align-items: center; justify-content: $labels_flex_display'>
-				<$portfolio_header_tag class='portfolio-header-text'>$portfolio_header_text</$portfolio_header_tag>
-				<div class='portfolio-filters'>";
-		echo implode('', $visible_filters);
-		echo "</div></div><div class='portfolio-items elementor-row'>";
+				<$portfolio_header_tag class='portfolio-header-text'>$portfolio_header_text</$portfolio_header_tag>";
+		if (strcmp($settings['hide_filters'], 'yes') !== 0) {
+		    echo "<div class='portfolio-filters'>";
+            echo implode('', $visible_filters);
+            echo "</div>";
+        }
+		echo "</div><div class='portfolio-items elementor-row'>";
 		echo implode('', $portfolio_items);
 		echo "</div>";
 

@@ -24,6 +24,7 @@ header {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    background-color: #6A8281;
 
     /* Get rid of the default border in Firefox/Opera. */
     border: none;
@@ -222,6 +223,17 @@ ul.menu li a {
   color: $sw-grey;
   text-transform: uppercase;
   letter-spacing: 1.8px;
+}
+
+// share links widget
+div.social-share-container ul.social-share-lists {
+  padding-left: 0;
+  font-size: 12px;
+  display: inline-flex;
+  list-style-type:none;
+  li a:hover {
+    text-decoration: underline;
+  }
 }
 
 .hero-title {

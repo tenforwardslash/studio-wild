@@ -30,6 +30,7 @@ class SW_Elementor_Widgets {
 	    require_once('sw-button.php');
         require_once('hideable-text.php');
         require_once('full-height-hero-title-blurb.php');
+        require_once('share-links.php');
 
         add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'widget_styles' ] );
         add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
@@ -58,6 +59,7 @@ class SW_Elementor_Widgets {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\SW_Button() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Hideable_Text() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Hero_Title_Blurb() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\Share_Links() );
     }
 
 }
