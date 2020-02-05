@@ -96,7 +96,7 @@ class Share_Links extends Widget_Base {
                     'size' => 20,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} ul.social-share-lists li:not(:first-child):not(:last-child):after' => 'margin: 0 {{SIZE}}{{UNIT}}; content: " | "',
+                    '{{WRAPPER}} ul.social-share-lists li:not(:first-child):not(:last-child):after' => 'margin: 0 {{SIZE}}{{UNIT}}; content: "|";',
                     '{{WRAPPER}} ul.social-share-lists li.social-share-text' => 'margin-right: 20px;'
                 ]
             ]
